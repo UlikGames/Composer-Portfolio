@@ -108,7 +108,7 @@ export const HomePage = () => {
                     <div className="grid md:grid-cols-12 gap-12 md:gap-8 items-center">
                         {/* Text Content */}
                         <div className="md:col-span-7 md:col-start-1">
-                            <p className="text-micro uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 mb-6">
+                            <p className="text-micro uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
                                 The Composer
                             </p>
                             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">

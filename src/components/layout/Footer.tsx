@@ -41,7 +41,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
 
                     {/* Navigation */}
                     <div className="md:col-span-3 md:col-start-7">
-                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 mb-6">
+                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
                             Navigation
                         </h4>
                         <nav className="flex flex-col gap-4" aria-label="Footer navigation">
@@ -62,7 +62,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
 
                     {/* Newsletter */}
                     <div className="md:col-span-4">
-                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 mb-6">
+                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
                             Stay Updated
                         </h4>
                         <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
@@ -88,7 +88,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
                 {/* Bottom Bar */}
                 <div className="mt-20 pt-8 border-t border-charcoal/10 dark:border-alabaster/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     {/* Copyright */}
-                    <p className="text-micro uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40">
+                    <p className="text-micro uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60">
                         © {currentYear} Ulvin Najafov. All rights reserved.
                     </p>
 
@@ -98,21 +98,21 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
                             href="https://musescore.com/user/41748651"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 link-interactive"
+                            className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 link-interactive"
                         >
                             Musescore
                         </a>
                         <a
-                            href="https://open.spotify.com/playlist/0o3BYszvGDryo2oUaWysjP?si=832ba904c4674283"
+                            href="https://open.spotify.com/user/1swb2wzs1183zklymc4ox9t0k"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 link-interactive"
+                            className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 link-interactive"
                         >
                             Spotify
                         </a>
                         <a
                             href="mailto:contact@ulvin.oguzlu@gmail.com"
-                            className="text-xs uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 link-interactive"
+                            className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 link-interactive"
                         >
                             Email
                         </a>

@@ -102,7 +102,7 @@ export const AboutPage = () => {
             <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 bg-taupe dark:bg-charcoal text-charcoal dark:text-alabaster">
                 <div className="max-w-luxury mx-auto">
                     <div className="max-w-3xl mx-auto text-center">
-                        <p className="text-micro uppercase tracking-editorial text-charcoal/40 dark:text-alabaster/40 mb-8">
+                        <p className="text-micro uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-8">
                             Artistic Philosophy
                         </p>
 
