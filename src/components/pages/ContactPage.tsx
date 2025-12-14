@@ -17,13 +17,33 @@ export const ContactPage = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setSubmitStatus('idle');
 
-        // Simulate form submission
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            setSubmitStatus('success');
-            setFormData({ name: '', email: '', subject: '', message: '' });
-        } catch {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                console.error('Email send error:', data);
+                setSubmitStatus('error');
+            } else {
+                setSubmitStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+            }
+        } catch (error) {
+            console.error('Network error:', error);
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
