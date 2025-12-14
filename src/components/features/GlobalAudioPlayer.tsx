@@ -31,7 +31,7 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, _setIsExpanded] = useState(false);
   const [showQueue, setShowQueue] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isCompact, setIsCompact] = useState(false);

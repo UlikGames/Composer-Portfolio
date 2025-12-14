@@ -41,19 +41,25 @@ export function useSearch<T extends Work>(
     return items.filter(item => {
       return searchFields.some(field => {
         const value = item[field];
-        
+
         if (Array.isArray(value)) {
-          // Search in arrays (tags, instrumentation)
-          return value.some(v => 
-            v.toLowerCase().includes(searchLower)
-          );
+          // Search in arrays (tags, instrumentation, links, movements)
+          return value.some(v => {
+            if (typeof v === 'string') {
+              return v.toLowerCase().includes(searchLower);
+            }
+            if (v && typeof v === 'object' && 'title' in v) {
+              return (v as { title: string }).title.toLowerCase().includes(searchLower);
+            }
+            return false;
+          });
         }
-        
+
         if (typeof value === 'string') {
           // Search in strings (title, description)
           return value.toLowerCase().includes(searchLower);
         }
-        
+
         return false;
       });
     });
@@ -68,4 +74,3 @@ export function useSearch<T extends Work>(
     isSearching,
   };
 }
-

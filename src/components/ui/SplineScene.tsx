@@ -1,16 +1,5 @@
 import { useRef, useEffect } from 'react';
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-                url: string;
-                'loading-anim-type'?: string;
-            };
-        }
-    }
-}
-
 /**
  * SplineScene - Spline 3D viewer wrapper component
  * Embed a Spline scene with responsive iframe
@@ -26,8 +15,6 @@ export const SplineScene = ({
     sceneUrl,
     className = ''
 }: SplineSceneProps) => {
-    if (!sceneUrl) return null;
-
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -56,11 +43,14 @@ export const SplineScene = ({
         };
     }, []);
 
+    if (!sceneUrl) return null;
+
     return (
         <div
             ref={containerRef}
             className={`w-full h-full ${className}`}
         >
+            {/* @ts-expect-error - spline-viewer is a web component loaded dynamically */}
             <spline-viewer
                 loading-anim-type="spinner-small-dark"
                 url={sceneUrl}

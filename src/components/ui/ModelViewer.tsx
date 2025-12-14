@@ -34,7 +34,7 @@ export const ModelViewer = ({
     shadowIntensity = '0.3',
     environmentImage = 'neutral', // 'neutral' or custom HDR URL
 }: ModelViewerProps) => {
-    const viewerRef = useRef<any>(null);
+    const viewerRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         // Dynamically load the model-viewer script if not already loaded
@@ -47,6 +47,7 @@ export const ModelViewer = ({
     }, []);
 
     return (
+        // @ts-expect-error - model-viewer is a web component loaded dynamically
         <model-viewer
             ref={viewerRef}
             src={src}
@@ -67,16 +68,7 @@ export const ModelViewer = ({
             )}
             style={{
                 '--poster-color': 'transparent',
-            } as any}
+            } as React.CSSProperties}
         />
     );
 };
-
-// Type definition for TypeScript
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'model-viewer': any;
-        }
-    }
-}
