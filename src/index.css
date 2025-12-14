@@ -305,6 +305,33 @@
     border-color: #D4AF37;
   }
 
+  /* Select dropdown dark mode fix */
+  select.editorial-input {
+    background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231A1A1A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    padding-right: 1.5rem;
+  }
+
+  .dark select.editorial-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F9F8F6' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  select.editorial-input option {
+    background-color: #F9F8F6;
+    color: #1A1A1A;
+    padding: 0.5rem;
+  }
+
+  .dark select.editorial-input option {
+    background-color: #1A1A1A;
+    color: #F9F8F6;
+  }
+
   /* Editorial image hover (colorful by default) */
   .img-editorial {
     filter: none;
