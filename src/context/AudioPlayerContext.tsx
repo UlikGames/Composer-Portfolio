@@ -95,7 +95,8 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (isPlaying) {
-      audio.play().catch(() => {
+      audio.play().catch((err) => {
+        if (err.name === 'AbortError') return;
         setIsPlaying(false);
         setIsLoading(false);
       });
