@@ -119,9 +119,10 @@ export const AboutPage = () => {
             {/* ============================================
           NOTABLE WORKS SECTION
           ============================================ */}
-            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10">
+            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
                 <div className="max-w-luxury mx-auto">
-                    <p className="text-micro uppercase tracking-editorial text-warmGrey mb-8">
+                    <h2 className="sr-only">Highlights</h2>
+                    <p className="text-micro uppercase tracking-editorial text-warmGrey mb-8" aria-hidden="true">
                         Highlights
                     </p>
 
@@ -194,7 +195,7 @@ export const AboutPage = () => {
                             </p>
                         </div>
                         <Link to="/works" className="btn-primary self-start">
-                            <span className="btn-bg" />
+                            <span className="btn-bg" aria-hidden="true" />
                             <span className="btn-text">Browse Works</span>
                         </Link>
                     </div>

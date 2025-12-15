@@ -64,9 +64,9 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
 
                     {/* Navigation */}
                     <div className="md:col-span-3 md:col-start-7">
-                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
+                        <p className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6 font-semibold">
                             Navigation
-                        </h4>
+                        </p>
                         <nav className="flex flex-col gap-4" aria-label="Footer navigation">
                             <Link to="/" className="text-sm text-charcoal/80 dark:text-alabaster/80 link-interactive">
                                 Home
@@ -85,9 +85,9 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
 
                     {/* Newsletter */}
                     <div className="md:col-span-4">
-                        <h4 className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
+                        <p className="text-xs uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6 font-semibold">
                             Updates
-                        </h4>
+                        </p>
                         <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
                             <input
                                 type="email"

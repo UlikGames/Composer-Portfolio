@@ -63,8 +63,6 @@ export const Layout = ({ children }: LayoutProps) => {
         id="main-content"
         className="relative z-10 flex-1 bg-transparent pt-20 md:pt-24 pb-20 md:pb-24"
         tabIndex={-1}
-        role="main"
-        aria-label="Main content"
       >
         {children}
       </main>

@@ -44,7 +44,7 @@ export const HomePage = () => {
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-delay-4">
                             <Link to="/works" className="btn-primary">
-                                <span className="btn-bg" />
+                                <span className="btn-bg" aria-hidden="true" />
                                 <span className="btn-text">Explore Works</span>
                             </Link>
                             <Link to="/about" className="btn-secondary">
@@ -97,7 +97,7 @@ export const HomePage = () => {
                     </svg>
 
                     {/* Text */}
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-light">Scroll</span>
+                    <span className="text-xs uppercase tracking-[0.3em] font-light">Scroll</span>
                 </div>
             </section>
 
@@ -122,7 +122,7 @@ export const HomePage = () => {
                                 like springs, and textures built with the same care as a blueprint.
                             </p>
                             <Link to="/about" className="btn-primary">
-                                <span className="btn-bg" />
+                                <span className="btn-bg" aria-hidden="true" />
                                 <span className="btn-text">Read More</span>
                             </Link>
                         </div>
@@ -130,7 +130,7 @@ export const HomePage = () => {
                         {/* Decorative Element */}
                         <div className="hidden md:block md:col-span-4 md:col-start-9">
                             <div className="aspect-[3/4] border border-charcoal/20 dark:border-alabaster/20 flex items-center justify-center">
-                                <span className="font-serif text-8xl text-charcoal/10 dark:text-alabaster/10">UN</span>
+                                <span className="font-serif text-8xl text-charcoal/10 dark:text-alabaster/10" aria-hidden="true">UN</span>
                             </div>
                         </div>
                     </div>
