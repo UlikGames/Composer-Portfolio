@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 /**
  * Editorial About Page
  * Biography with drop cap, portrait, timeline of achievements
@@ -179,28 +177,6 @@ export const AboutPage = () => {
                 </div>
             </section>
 
-            {/* ============================================
-          CTA SECTION
-          ============================================ */}
-            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 bg-taupe dark:bg-charcoal/80">
-                <div className="max-w-luxury mx-auto">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-                        <div>
-                            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">
-                                Explore the <em className="text-gold">Catalog</em>
-                            </h2>
-                            <p className="text-warmGrey max-w-lg">
-                                Browse scores and recordings — from intimate piano pieces to larger studies in
-                                form and color.
-                            </p>
-                        </div>
-                        <Link to="/works" className="btn-primary self-start">
-                            <span className="btn-bg" aria-hidden="true" />
-                            <span className="btn-text">Browse Works</span>
-                        </Link>
-                    </div>
-                </div>
-            </section>
         </div>
     );
 };
