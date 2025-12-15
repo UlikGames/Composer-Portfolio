@@ -649,16 +649,11 @@ export const works: Work[] = [
     artist: "Ulvin Najafov",
     instrumentation: ['Orchestra'],
     tags: ['Orchestra', 'Film', 'Dramatic', 'Heroic'],
+    audioUrl: '/audio/symphony-of-story/audio.mp3',
     scoreAvailability: 'request',
     imageUrl: '/images/works/symphony-of-story/poster.jpg',
     thumbnailUrl: '/images/works/symphony-of-story/poster.jpg',
     isFeatured: true,
-    movements: [
-      { title: 'I. Allegro maestoso', duration: '11:15', audioUrl: '/audio/symphony-of-story/1.mp3' },
-      { title: 'II. Adagio', duration: '10:05', audioUrl: '/audio/symphony-of-story/2.mp3' },
-      { title: 'III. Scherzo. Allegro', duration: '06:09', audioUrl: '/audio/symphony-of-story/3.mp3' },
-      { title: 'IV. Largo. Allegro con brio', duration: '09:01', audioUrl: '/audio/symphony-of-story/4.mp3' }
-    ],
   },
   {
     id: 'tears-of-the-sky',
