@@ -67,15 +67,15 @@ export const HomePage = () => {
                     </div>
                 </div>
 
-                {/* Vertical Text (Desktop Only) */}
-                <div className="hidden lg:block absolute right-16 top-1/2 -translate-y-1/2">
+                {/* Vertical Text (Desktop Only - xl+ to avoid piano overlap) */}
+                <div className="hidden xl:block absolute right-16 top-1/2 -translate-y-1/2">
                     <p className="vertical-text text-micro uppercase tracking-editorial text-warmGrey">
                         Portfolio / Est. 2024
                     </p>
                 </div>
 
-                {/* Scroll Cue */}
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 flex flex-col items-center gap-3 text-warmGrey/80 animate-fade-in-delay-4">
+                {/* Scroll Cue - Hidden on mobile/tablet to avoid overlap with piano */}
+                <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 flex-col items-center gap-3 text-warmGrey/80 animate-fade-in-delay-4">
                     {/* Mouse Icon with animated scroll wheel */}
                     <div className="relative w-6 h-10 border-2 border-current rounded-full flex justify-center">
                         <div className="w-1 h-2.5 bg-current rounded-full mt-2 animate-mouse-wheel" />
@@ -97,7 +97,7 @@ export const HomePage = () => {
                     </svg>
 
                     {/* Text */}
-                    <span className="text-xs uppercase tracking-[0.3em] font-light">Scroll</span>
+                    <span className="text-xs uppercase tracking-[0.3em] font-light text-warmGrey dark:text-warmGreyLight">Scroll</span>
                 </div>
             </section>
 
