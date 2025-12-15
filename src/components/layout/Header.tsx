@@ -82,11 +82,11 @@ export const Header = () => {
                                         : 'border-charcoal/20 dark:border-alabaster/20 text-charcoal dark:text-alabaster hover:border-gold hover:text-gold'
                                     }
                                 `}
-                                aria-label={isPlaying ? 'Pause' : hasTrack ? 'Resume' : 'Play'}
+                                aria-label={isPlaying ? 'Playing - click to pause' : hasTrack || isShuffle ? 'Paused - click to resume' : 'Listen - click to play music'}
                             >
                                 {isPlaying ? (
                                     <>
-                                        <span className="flex gap-0.5">
+                                        <span className="flex gap-0.5" aria-hidden="true">
                                             <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '0ms' }} />
                                             <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '150ms' }} />
                                             <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '300ms' }} />
@@ -95,14 +95,14 @@ export const Header = () => {
                                     </>
                                 ) : hasTrack || isShuffle ? (
                                     <>
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                             <polygon points="5,3 19,12 5,21" />
                                         </svg>
                                         Paused
                                     </>
                                 ) : (
                                     <>
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                             <polygon points="5,3 19,12 5,21" />
                                         </svg>
                                         Listen
@@ -126,16 +126,16 @@ export const Header = () => {
                                         : 'bg-alabaster/90 dark:bg-charcoal/90 border border-charcoal/15 dark:border-alabaster/15 text-charcoal dark:text-alabaster'
                                     }
                                 `}
-                                aria-label={isPlaying ? 'Pause' : hasTrack ? 'Resume' : 'Play'}
+                                aria-label={isPlaying ? 'Pause music' : hasTrack || isShuffle ? 'Resume music' : 'Play music'}
                             >
                                 {isPlaying ? (
-                                    <span className="flex gap-0.5">
+                                    <span className="flex gap-0.5" aria-hidden="true">
                                         <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '0ms' }} />
                                         <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '150ms' }} />
                                         <span className="w-0.5 h-3 bg-current animate-pulse" style={{ animationDelay: '300ms' }} />
                                     </span>
                                 ) : (
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                         <polygon points="5,3 19,12 5,21" />
                                     </svg>
                                 )}
