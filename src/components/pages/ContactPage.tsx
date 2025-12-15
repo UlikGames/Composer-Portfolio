@@ -88,7 +88,7 @@ export const ContactPage = () => {
             {/* ============================================
           CONTACT FORM SECTION
           ============================================ */}
-            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10">
+            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
                 <div className="max-w-luxury mx-auto">
                     <div className="grid md:grid-cols-12 gap-12 md:gap-16">
                         {/* Form */}
@@ -217,7 +217,7 @@ export const ContactPage = () => {
                                         Email
                                     </p>
                                     <a
-                                        href="mailto:contact@ulvin.oguzlu@gmail.com"
+                                        href="mailto:ulvin.oguzlu@gmail.com"
                                         className="font-serif text-xl link-interactive text-charcoal dark:text-alabaster"
                                     >
                                         ulvin.oguzlu@gmail.com

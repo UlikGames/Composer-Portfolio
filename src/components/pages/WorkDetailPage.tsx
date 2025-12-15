@@ -140,7 +140,7 @@ export const WorkDetailPage = () => {
                                 {work.instrumentation.map(inst => (
                                     <span
                                         key={inst}
-                                        className="px-4 py-2 text-xs uppercase tracking-editorial border border-charcoal/20 text-warmGrey"
+                                        className="px-4 py-2 text-xs uppercase tracking-editorial border border-charcoal/20 dark:border-alabaster/20 text-warmGrey"
                                     >
                                         {inst}
                                     </span>
@@ -210,7 +210,7 @@ export const WorkDetailPage = () => {
           MOVEMENTS SECTION
           ============================================ */}
             {work.movements && work.movements.length > 0 && (
-                <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10">
+                <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
                     <div className="max-w-luxury mx-auto">
                         <p className="text-micro uppercase tracking-editorial text-warmGrey mb-8">
                             {work.movements.length} Movements
@@ -220,7 +220,7 @@ export const WorkDetailPage = () => {
                             {work.movements.map((movement, index) => (
                                 <article
                                     key={index}
-                                    className="border-t border-charcoal/10 py-6 flex items-center justify-between gap-4 group hover:bg-taupe/20 transition-colors duration-500 px-4 -mx-4"
+                                    className="border-t border-charcoal/10 dark:border-alabaster/10 py-6 flex items-center justify-between gap-4 group hover:bg-taupe/20 dark:hover:bg-charcoal/30 transition-colors duration-500 px-4 -mx-4"
                                 >
                                     <div className="flex items-center gap-6 flex-1 min-w-0">
                                         {/* Track Number */}

@@ -160,7 +160,7 @@ export const AboutPage = () => {
                         ].map((category, index) => (
                             <article
                                 key={category.title}
-                                className="border-t border-charcoal pt-8 hover:bg-taupe/30 transition-colors duration-500 p-4 -m-4"
+                                className="border-t border-charcoal dark:border-alabaster/20 pt-8 hover:bg-taupe/30 dark:hover:bg-charcoal/30 transition-colors duration-500 p-4 -m-4"
                                 style={{ animationDelay: `${index * 100}ms` }}
                             >
                                 <p className="text-micro uppercase tracking-editorial text-warmGrey mb-2">
