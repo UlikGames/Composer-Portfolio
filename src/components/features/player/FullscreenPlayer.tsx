@@ -104,6 +104,40 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
         setDragOverIndex(null);
     };
 
+    // Touch event handlers for mobile reordering
+    const touchStartY = useRef<number>(0);
+    const touchStartIndex = useRef<number | null>(null);
+
+    const handleTouchStart = (e: React.TouchEvent, index: number) => {
+        touchStartY.current = e.touches[0].clientY;
+        touchStartIndex.current = index;
+        setDraggedIndex(index);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (touchStartIndex.current === null) return;
+
+        const touch = e.touches[0];
+        const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
+        const queueItem = elements.find(el => el.getAttribute('data-queue-index'));
+
+        if (queueItem) {
+            const overIndex = parseInt(queueItem.getAttribute('data-queue-index')!, 10);
+            if (overIndex !== touchStartIndex.current) {
+                setDragOverIndex(overIndex);
+            }
+        }
+    };
+
+    const handleTouchEnd = () => {
+        if (touchStartIndex.current !== null && dragOverIndex !== null && touchStartIndex.current !== dragOverIndex) {
+            moveInQueue(touchStartIndex.current, dragOverIndex);
+        }
+        touchStartIndex.current = null;
+        setDraggedIndex(null);
+        setDragOverIndex(null);
+    };
+
     // Build artwork map and find work info for current track
     const { artworkMap, workInfoMap, movementsMap } = useMemo(() => {
         const artworkMap = new Map<string, string>();
@@ -319,10 +353,28 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
 
             {/* Movements Panel */}
             {showMovements && hasMovements && (
-                <div className="absolute top-6 left-6 z-10 bg-charcoal/90 backdrop-blur-xl rounded-lg border border-alabaster/10 p-4 max-w-xs">
-                    <h3 className="text-sm uppercase tracking-editorial text-alabaster/60 mb-3">
-                        {currentWorkInfo?.workTitle}
-                    </h3>
+                <div className={cn(
+                    "bg-charcoal/95 backdrop-blur-xl rounded-lg border border-alabaster/10 p-4 flex flex-col",
+                    // Mobile: Full screen overlay
+                    "fixed inset-4 z-50 max-h-[calc(100vh-2rem)] overflow-y-auto",
+                    // Desktop: Positioned panel
+                    "md:absolute md:inset-auto md:top-6 md:left-6 md:max-w-xs md:max-h-96"
+                )}>
+                    {/* Mobile close button */}
+                    <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-sm uppercase tracking-editorial text-alabaster/60">
+                            {currentWorkInfo?.workTitle}
+                        </h3>
+                        <button
+                            onClick={() => setShowMovements(false)}
+                            className="md:hidden p-1 text-alabaster/50 hover:text-alabaster"
+                            aria-label="Close movements"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                     <div className="space-y-1 max-h-64 overflow-y-auto">
                         {movementsWithCurrent?.map((movement, idx) => (
                             <button
@@ -348,7 +400,13 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
 
             {/* Catalog Panel - Right side */}
             {showCatalog && (
-                <div className="absolute top-6 right-20 bottom-20 z-10 w-80 bg-charcoal/90 backdrop-blur-xl rounded-lg border border-alabaster/10 flex flex-col">
+                <div className={cn(
+                    "bg-charcoal/95 backdrop-blur-xl rounded-lg border border-alabaster/10 flex flex-col",
+                    // Mobile: Full screen overlay
+                    "fixed inset-4 z-50",
+                    // Desktop: Positioned panel
+                    "md:absolute md:inset-auto md:top-6 md:right-20 md:bottom-20 md:w-80"
+                )}>
                     <div className="flex border-b border-alabaster/10">
                         <button
                             onClick={() => setActiveTab('browse')}
@@ -375,6 +433,16 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                 <span className="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
                             )}
                         </button>
+                        {/* Mobile close button */}
+                        <button
+                            onClick={() => setShowCatalog(false)}
+                            className="md:hidden px-3 py-3 text-alabaster/50 hover:text-alabaster"
+                            aria-label="Close catalog"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
 
                     <div className="flex-1 overflow-y-auto">
@@ -390,13 +458,16 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                     return (
                                         <div key={work.title} className="border-b border-alabaster/10 pb-2">
                                             {/* Work header - clickable to expand */}
-                                            <button
+                                            <div
                                                 onClick={() => hasMultiple ? toggleWorkExpanded(work.title) : null}
                                                 className={cn(
                                                     "w-full flex items-center gap-3 p-2 rounded transition-all",
                                                     hasMultiple && "hover:bg-alabaster/5 cursor-pointer",
                                                     !hasMultiple && "cursor-default"
                                                 )}
+                                                role={hasMultiple ? "button" : undefined}
+                                                tabIndex={hasMultiple ? 0 : undefined}
+                                                onKeyDown={hasMultiple ? (e) => e.key === 'Enter' && toggleWorkExpanded(work.title) : undefined}
                                             >
                                                 {workArt && (
                                                     <img
@@ -464,7 +535,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                                         </button>
                                                     </div>
                                                 )}
-                                            </button>
+                                            </div>
 
                                             {/* Movements dropdown */}
                                             {hasMultiple && isExpanded && (
@@ -528,6 +599,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                             return (
                                                 <div
                                                     key={`${track.src}-${realIndex}`}
+                                                    data-queue-index={realIndex}
                                                     draggable
                                                     onDragStart={(e) => handleDragStart(e, realIndex)}
                                                     onDragEnd={handleDragEnd}
@@ -535,14 +607,19 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                                     onDragLeave={handleDragLeave}
                                                     onDrop={(e) => handleDrop(e, realIndex)}
                                                     className={cn(
-                                                        "flex items-center gap-3 p-2 rounded bg-alabaster/5 hover:bg-alabaster/10 transition-colors group cursor-grab active:cursor-grabbing",
-                                                        isDragging && "opacity-50",
+                                                        "flex items-center gap-3 p-2 rounded bg-alabaster/5 hover:bg-alabaster/10 transition-colors group",
+                                                        isDragging && "opacity-50 bg-gold/10",
                                                         isDragOver && "border-t-2 border-gold"
                                                     )}
                                                 >
-                                                    {/* Drag Handle */}
-                                                    <div className="flex-shrink-0 text-alabaster/20 hover:text-alabaster transition-colors">
-                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                                    {/* Drag Handle - touch here to reorder */}
+                                                    <div
+                                                        className="flex-shrink-0 text-alabaster/30 hover:text-alabaster transition-colors cursor-grab active:cursor-grabbing touch-none p-1"
+                                                        onTouchStart={(e) => handleTouchStart(e, realIndex)}
+                                                        onTouchMove={handleTouchMove}
+                                                        onTouchEnd={handleTouchEnd}
+                                                    >
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                                             <path d="M8 6h2v2H8V6zm6 0h2v2h-2V6zM8 11h2v2H8v-2zm6 0h2v2h-2v-2zm-6 5h2v2H8v-2zm6 0h2v2h-2v-2z" />
                                                         </svg>
                                                     </div>
@@ -556,7 +633,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                                     </div>
                                                     <button
                                                         onClick={() => removeFromQueue(realIndex)}
-                                                        className="p-1 text-alabaster/20 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
+                                                        className="p-1 text-alabaster/40 hover:text-red-400 md:opacity-0 md:group-hover:opacity-100 transition-all"
                                                         title="Remove from queue"
                                                     >
                                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

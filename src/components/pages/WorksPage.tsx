@@ -15,6 +15,8 @@ export const WorksPage = () => {
     const [activeInstrumentation, setActiveInstrumentation] = useState<string[]>([]);
     const [activeTags, setActiveTags] = useState<string[]>([]);
     const [playMenuOpen, setPlayMenuOpen] = useState<string | null>(null);
+    const [showInstrumentation, setShowInstrumentation] = useState(false);
+    const [showStyle, setShowStyle] = useState(false);
     useEffect(() => {
         if (!playMenuOpen) return;
         const handleClick = (event: MouseEvent) => {
@@ -261,39 +263,73 @@ export const WorksPage = () => {
                     <div className="space-y-6">
                         {/* Instrumentation */}
                         <div>
-                            <p className="text-micro uppercase tracking-editorial text-warmGrey mb-4">
-                                Instrumentation
-                            </p>
-                            <div className="flex flex-wrap gap-3">
-                                {instrumentationFilters.map(filter => (
-                                    <button
-                                        key={filter}
-                                        onClick={() => toggleFilter(filter, 'instrumentation')}
-                                        aria-pressed={activeInstrumentation.includes(filter)}
-                                        className={`pill-filter hover-lift text-xs uppercase tracking-editorial ${activeInstrumentation.includes(filter) ? 'is-active' : ''}`}
-                                    >
-                                        {filter}
-                                    </button>
-                                ))}
+                            <button
+                                onClick={() => setShowInstrumentation(!showInstrumentation)}
+                                className="flex items-center justify-between w-full md:pointer-events-none py-2"
+                            >
+                                <p className="text-micro uppercase tracking-editorial text-warmGrey">
+                                    Instrumentation
+                                    {activeInstrumentation.length > 0 && (
+                                        <span className="ml-2 text-gold">({activeInstrumentation.length})</span>
+                                    )}
+                                </p>
+                                <svg
+                                    className={`w-4 h-4 md:hidden text-warmGrey transition-transform ${showInstrumentation ? 'rotate-180' : ''}`}
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path d="M7 10l5 5 5-5z" />
+                                </svg>
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 md:overflow-visible ${showInstrumentation ? 'max-h-96 mt-2' : 'max-h-0 md:max-h-none md:mt-3'}`}>
+                                <div className="flex flex-wrap gap-2 md:gap-3">
+                                    {instrumentationFilters.map(filter => (
+                                        <button
+                                            key={filter}
+                                            onClick={() => toggleFilter(filter, 'instrumentation')}
+                                            aria-pressed={activeInstrumentation.includes(filter)}
+                                            className={`pill-filter hover-lift text-xs uppercase tracking-editorial ${activeInstrumentation.includes(filter) ? 'is-active' : ''}`}
+                                        >
+                                            {filter}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
                         {/* Tags */}
                         <div>
-                            <p className="text-micro uppercase tracking-editorial text-warmGrey mb-4">
-                                Style
-                            </p>
-                            <div className="flex flex-wrap gap-3">
-                                {tagFilters.map(filter => (
-                                    <button
-                                        key={filter}
-                                        onClick={() => toggleFilter(filter, 'tag')}
-                                        aria-pressed={activeTags.includes(filter)}
-                                        className={`pill-filter hover-lift text-xs uppercase tracking-editorial ${activeTags.includes(filter) ? 'is-active' : ''}`}
-                                    >
-                                        {filter}
-                                    </button>
-                                ))}
+                            <button
+                                onClick={() => setShowStyle(!showStyle)}
+                                className="flex items-center justify-between w-full md:pointer-events-none py-2"
+                            >
+                                <p className="text-micro uppercase tracking-editorial text-warmGrey">
+                                    Style
+                                    {activeTags.length > 0 && (
+                                        <span className="ml-2 text-gold">({activeTags.length})</span>
+                                    )}
+                                </p>
+                                <svg
+                                    className={`w-4 h-4 md:hidden text-warmGrey transition-transform ${showStyle ? 'rotate-180' : ''}`}
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path d="M7 10l5 5 5-5z" />
+                                </svg>
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 md:overflow-visible ${showStyle ? 'max-h-[500px] mt-2' : 'max-h-0 md:max-h-none md:mt-3'}`}>
+                                <div className="flex flex-wrap gap-2 md:gap-3">
+                                    {tagFilters.map(filter => (
+                                        <button
+                                            key={filter}
+                                            onClick={() => toggleFilter(filter, 'tag')}
+                                            aria-pressed={activeTags.includes(filter)}
+                                            className={`pill-filter hover-lift text-xs uppercase tracking-editorial ${activeTags.includes(filter) ? 'is-active' : ''}`}
+                                        >
+                                            {filter}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
@@ -367,7 +403,7 @@ export const WorksPage = () => {
                         </div>
                     ) : (
                         <>
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 lg:gap-12">
                                 {paginatedWorks.map((work, index) => (
                                     <article
                                         key={work.id}
@@ -392,14 +428,14 @@ export const WorksPage = () => {
 
                                         {/* Work Info */}
                                         <div className="flex flex-col">
-                                            <p className="text-micro uppercase tracking-editorial text-warmGrey mb-2">
+                                            <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 md:mb-2">
                                                 {work.year} · {work.instrumentation.join(', ')}
                                             </p>
-                                            <h3 className="font-serif text-2xl md:text-3xl mb-3 group-hover:text-gold transition-colors duration-500">
+                                            <h3 className="font-serif text-lg md:text-2xl lg:text-3xl mb-2 md:mb-3 group-hover:text-gold transition-colors duration-500 leading-tight">
                                                 <Link to={`/works/${work.id}`}>{work.title}</Link>
                                             </h3>
-                                            <p className="text-sm text-warmGrey mb-4">
-                                                {work.duration} · {work.movements ? `${work.movements.length} movements` : 'Single movement'}
+                                            <p className="text-xs md:text-sm text-warmGrey mb-2 md:mb-4">
+                                                {work.duration} · {work.movements ? `${work.movements.length} mvts` : 'Single'}
                                             </p>
 
                                             {/* Tags */}
@@ -415,24 +451,24 @@ export const WorksPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex items-center gap-6 relative" data-play-menu>
+                                            <div className="flex items-center gap-2 md:gap-6 relative flex-wrap" data-play-menu>
                                                 {(work.audioUrl || (work.movements && work.movements.some(m => m.audioUrl))) && (
                                                     <>
                                                         <button
                                                             onClick={() => handlePlayWork(work)}
-                                                            className="text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-2"
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
                                                         >
-                                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                                            <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" className="md:w-3 md:h-3">
                                                                 <polygon points="5,3 19,12 5,21" />
                                                             </svg>
                                                             Play
                                                         </button>
                                                         <button
                                                             onClick={() => handleAddToQueue(work)}
-                                                            className="text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-2"
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
                                                             title="Add to queue"
                                                         >
-                                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="md:w-3.5 md:h-3.5">
                                                                 <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z" />
                                                             </svg>
                                                             Queue
@@ -441,7 +477,7 @@ export const WorksPage = () => {
                                                 )}
                                                 <Link
                                                     to={`/works/${work.id}`}
-                                                    className="text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster link-interactive"
+                                                    className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster link-interactive"
                                                 >
                                                     Details →
                                                 </Link>
