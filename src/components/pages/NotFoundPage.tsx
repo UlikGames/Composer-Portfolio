@@ -11,7 +11,7 @@ export const NotFoundPage = () => {
         <div className="decorative-line mx-auto mb-8" />
 
         {/* 404 */}
-        <p className="font-serif text-8xl md:text-9xl text-charcoal/10 mb-4">
+        <p className="font-serif text-8xl md:text-9xl text-charcoal/10 dark:text-alabaster/10 mb-4">
           404
         </p>
 
