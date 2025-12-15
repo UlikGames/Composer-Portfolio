@@ -17,7 +17,7 @@ export const AboutPage = () => {
 
                     {/* Overline */}
                     <p className="text-micro uppercase tracking-editorial text-warmGrey mb-6">
-                        The Composer
+                        Mechanical Engineering Student • Composer & Pianist
                     </p>
 
                     {/* Page Title */}
@@ -27,8 +27,8 @@ export const AboutPage = () => {
 
                     {/* Subtitle */}
                     <p className="text-warmGrey text-xl md:text-2xl max-w-2xl leading-relaxed">
-                        Contemporary classical composer bridging Romantic tradition
-                        with modern musical expression.
+                        I study machines and motion — and write contemporary classical music built with
+                        structure, atmosphere, and feeling.
                     </p>
                 </div>
             </section>
@@ -50,7 +50,7 @@ export const AboutPage = () => {
                                 {/* Vertical Label */}
                                 <div className="absolute left-4 bottom-8 hidden lg:block">
                                     <p className="vertical-text text-micro uppercase tracking-editorial text-warmGrey">
-                                        Composer / Pianist
+                                        Engineering / Music
                                     </p>
                                 </div>
                             </div>
@@ -64,31 +64,31 @@ export const AboutPage = () => {
 
                             <div className="prose prose-lg">
                                 <p className="text-lg leading-relaxed mb-6 drop-cap">
-                                    Ulvin Najafov is a contemporary classical composer whose work seamlessly
-                                    weaves the emotional depth of the Romantic era with modern compositional
-                                    techniques. His catalog spans orchestral symphonies, intimate piano works,
-                                    chamber music, and evocative film scores.
+                                    I’m Ulvin Najafov — a mechanical engineering student who also composes and
+                                    performs contemporary classical music. I’m fascinated by how the same ideas
+                                    show up in both worlds: tension and release, balance, symmetry, resonance,
+                                    and the way small details shape the whole.
                                 </p>
 
                                 <p className="text-warmGrey leading-relaxed mb-6">
-                                    Born with an innate passion for music, Najafov began his compositional
-                                    journey at an early age, drawing inspiration from the great masters—Chopin,
-                                    Rachmaninoff, and Tchaikovsky—while developing his own distinctive voice.
-                                    His compositions are characterized by lush harmonies, memorable melodies,
-                                    and a profound emotional resonance that speaks to listeners across cultures.
+                                    My musical language sits close to the Romantic tradition — lyric melody,
+                                    rich harmony, clear storytelling — but I try to frame it with modern pacing
+                                    and texture. I’m drawn to pieces that feel “designed”: themes that return
+                                    with purpose, harmonies that bend under pressure, and climaxes that arrive
+                                    like a mechanism finally locking into place.
                                 </p>
 
                                 <p className="text-warmGrey leading-relaxed mb-6">
-                                    The composer's notable works include the "Grand Waltzes" collection—a
-                                    monumental set of 24 piano waltzes exploring every major and minor key—and
-                                    the "L'Inconnue" series, twelve evocative nocturnes that journey through
-                                    the mysterious landscapes of night.
+                                    Most of my work lives at the piano, where sketches become miniatures,
+                                    waltzes, nocturnes, and larger forms. From there, some pieces expand outward
+                                    into chamber writing and orchestral color — always with the same goal: make
+                                    something emotionally direct, but structurally honest.
                                 </p>
 
                                 <p className="text-warmGrey leading-relaxed">
-                                    His orchestral works, including the Piano Concerto No. 1 in E minor and
-                                    Symphony No. 1 in C Minor, demonstrate a masterful command of orchestration
-                                    and form, earning recognition for their dramatic scope and emotional intensity.
+                                    This site is my portfolio — a curated catalog of scores, recordings, and
+                                    projects in progress. If you’d like to collaborate, perform a piece, or just
+                                    talk music, feel free to reach out.
                                 </p>
                             </div>
                         </div>
@@ -107,8 +107,8 @@ export const AboutPage = () => {
                         </p>
 
                         <blockquote className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight mb-12">
-                            "Music is the <em className="text-gold">language</em> of emotions that words
-                            cannot express. Each note is a brushstroke on the canvas of silence."
+                            "I write music like I design mechanisms: with <em className="text-gold">clarity</em>,
+                            tension, and release — so emotion has a structure to live inside."
                         </blockquote>
 
                         <div className="decorative-line mx-auto" />
@@ -122,41 +122,40 @@ export const AboutPage = () => {
             <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10">
                 <div className="max-w-luxury mx-auto">
                     <p className="text-micro uppercase tracking-editorial text-warmGrey mb-8">
-                        Notable Works
+                        Highlights
                     </p>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Work Categories */}
                         {[
                             {
+                                title: 'Piano Works',
+                                description: 'Waltzes, nocturnes, preludes, and larger-form pieces',
+                                count: '40+ pieces',
+                            },
+                            {
                                 title: 'Grand Waltzes',
-                                description: '24 piano waltzes exploring every key',
-                                count: '24 pieces',
+                                description: 'A growing set of waltzes shaped around key, color, and motion',
+                                count: 'Series',
                             },
                             {
-                                title: "L'Inconnue",
-                                description: 'Twelve mysterious nocturnes for piano',
-                                count: '12 pieces',
+                                title: 'Nocturnes',
+                                description: 'Night pieces focused on harmony, stillness, and long melody',
+                                count: 'Series',
                             },
                             {
-                                title: 'Piano Concerto No. 1',
-                                description: 'Three-movement concerto in E minor',
-                                count: '34 min',
+                                title: 'Chamber Writing',
+                                description: 'Works for strings and mixed ensembles, built from piano sketches',
+                                count: 'In progress',
                             },
                             {
-                                title: 'Symphony No. 1',
-                                description: 'Four-movement symphony in C minor',
-                                count: '37 min',
-                            },
-                            {
-                                title: 'Chamber Works',
-                                description: 'String quartets, violin sonatas, cello pieces',
-                                count: '15+ pieces',
+                                title: 'Orchestral Studies',
+                                description: 'Themes and movements exploring orchestral color and form',
+                                count: 'Sketchbook',
                             },
                             {
                                 title: 'Film & Dramatic',
-                                description: 'Orchestral works for cinema',
-                                count: '5+ scores',
+                                description: 'Cues and scenes written for narrative and atmosphere',
+                                count: 'Projects',
                             },
                         ].map((category, index) => (
                             <article
@@ -190,8 +189,8 @@ export const AboutPage = () => {
                                 Explore the <em className="text-gold">Catalog</em>
                             </h2>
                             <p className="text-warmGrey max-w-lg">
-                                Discover the full collection of compositions, from solo piano
-                                works to grand orchestral pieces.
+                                Browse scores and recordings — from intimate piano pieces to larger studies in
+                                form and color.
                             </p>
                         </div>
                         <Link to="/works" className="btn-primary self-start">

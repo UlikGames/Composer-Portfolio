@@ -23,21 +23,22 @@ export const HomePage = () => {
 
                         {/* Overline */}
                         <p className="text-micro uppercase tracking-editorial text-warmGrey mb-6 animate-fade-in-delay-1">
-                            Classical Composer & Pianist
+                            Mechanical Engineering Student • Composer & Pianist
                         </p>
 
                         {/* Hero Headline with Mixed Italics */}
                         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-tight-luxury mb-8 animate-fade-in-delay-2">
-                            <span className="block">Crafting</span>
+                            <span className="block">Engineering</span>
                             <span className="block">
-                                <em className="text-gold">Timeless</em> Music
+                                <em className="text-gold">Emotion</em> Into Music
                             </span>
                         </h1>
 
                         {/* Description */}
                         <p className="text-warmGrey text-lg md:text-xl leading-relaxed mb-12 animate-fade-in-delay-3">
-                            Contemporary classical composer known for evocative orchestral works,
-                            intimate chamber pieces, and expressive piano compositions.
+                            By day I study mechanics, materials, and motion — by night I write contemporary
+                            classical works: orchestral sketches, chamber pieces, and piano music shaped by
+                            structure, contrast, and atmosphere.
                         </p>
 
                         {/* CTA Buttons */}
@@ -47,7 +48,7 @@ export const HomePage = () => {
                                 <span className="btn-text">Explore Works</span>
                             </Link>
                             <Link to="/about" className="btn-secondary">
-                                About the Composer
+                                About Me
                             </Link>
                         </div>
                     </div>
@@ -69,7 +70,7 @@ export const HomePage = () => {
                 {/* Vertical Text (Desktop Only) */}
                 <div className="hidden lg:block absolute right-16 top-1/2 -translate-y-1/2">
                     <p className="vertical-text text-micro uppercase tracking-editorial text-warmGrey">
-                        Editorial / Est. 2024
+                        Portfolio / Est. 2024
                     </p>
                 </div>
 
@@ -109,21 +110,20 @@ export const HomePage = () => {
                         {/* Text Content */}
                         <div className="md:col-span-7 md:col-start-1">
                             <p className="text-micro uppercase tracking-editorial text-charcoal/60 dark:text-alabaster/60 mb-6">
-                                The Composer
+                                The Story
                             </p>
                             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">
-                                A Voice for the <em className="text-gold">Modern Era</em>
+                                Where <em className="text-gold">Design</em> Meets Sound
                             </h2>
                             <p className="text-charcoal/70 dark:text-alabaster/70 text-lg leading-relaxed mb-8 max-w-xl drop-cap">
-                                Drawing from the rich traditions of the Romantic period while embracing
-                                contemporary sensibilities, Ulvin Najafov creates music that speaks to
-                                the depths of human emotion. Each composition is a journey through
-                                landscapes of sound, inviting listeners to discover new dimensions
-                                of musical expression.
+                                I’m a mechanical engineering student with a parallel life in music — writing
+                                classical compositions and performing at the piano. I’m drawn to forms that feel
+                                inevitable: themes that return like mechanisms, harmonies that tension and release
+                                like springs, and textures built with the same care as a blueprint.
                             </p>
                             <Link to="/about" className="btn-primary">
                                 <span className="btn-bg" />
-                                <span className="btn-text">Read Biography</span>
+                                <span className="btn-text">Read More</span>
                             </Link>
                         </div>
 
@@ -148,7 +148,7 @@ export const HomePage = () => {
                                 {works.length}+
                             </p>
                             <p className="text-micro uppercase tracking-editorial text-warmGrey">
-                                Compositions
+                                Works Published
                             </p>
                         </div>
                         <div className="text-center">
@@ -156,7 +156,7 @@ export const HomePage = () => {
                                 40+
                             </p>
                             <p className="text-micro uppercase tracking-editorial text-warmGrey">
-                                Waltzes
+                                Waltzes & Miniatures
                             </p>
                         </div>
                         <div className="text-center">
@@ -164,7 +164,7 @@ export const HomePage = () => {
                                 10+
                             </p>
                             <p className="text-micro uppercase tracking-editorial text-warmGrey">
-                                Orchestral Works
+                                Large-Form Pieces
                             </p>
                         </div>
                     </div>
