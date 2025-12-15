@@ -1,6 +1,16 @@
 import { Work } from '@/types';
 
-export const works: Work[] = [
+// Cloudinary CDN base URL for audio files
+const CLOUDINARY_AUDIO_BASE = 'https://res.cloudinary.com/ddl0vgspj/raw/upload';
+
+// Helper to convert local audio path to a Cloudinary URL while leaving absolute URLs untouched
+const cloudinaryAudio = (path?: string) => {
+  if (!path || path.startsWith('http')) return path;
+  const normalizedPath = path.replace(/^\.?\//, '');
+  return `${CLOUDINARY_AUDIO_BASE}/${normalizedPath}`;
+};
+
+const worksData: Work[] = [
   {
     id: 'adagio',
     title: 'Adagio',
@@ -966,6 +976,18 @@ export const works: Work[] = [
     isFeatured: true,
   },
 ];
+
+const applyCloudinaryAudio = (items: Work[]): Work[] =>
+  items.map(work => ({
+    ...work,
+    audioUrl: cloudinaryAudio(work.audioUrl),
+    movements: work.movements?.map(movement => ({
+      ...movement,
+      audioUrl: cloudinaryAudio(movement.audioUrl),
+    })),
+  }));
+
+export const works: Work[] = applyCloudinaryAudio(worksData);
 
 // Helper functions
 export const getWorkById = (id: string): Work | undefined => {

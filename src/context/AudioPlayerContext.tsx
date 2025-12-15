@@ -37,6 +37,7 @@ interface AudioPlayerContextValue {
   currentIndex: number;
   currentTrack?: AudioTrack;
   isPlaying: boolean;
+  isLoading: boolean;
   isShuffle: boolean;
   isRepeat: boolean;
   addToQueue: (track: AudioTrack) => void;
@@ -60,6 +61,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
   const [queue, setQueue] = useState<AudioTrack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
   const [history, setHistory] = useState<AudioTrack[]>([]); // Track history for going back
@@ -81,17 +83,22 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       audio.load();
       previousTrackRef.current = undefined;
       setIsPlaying(false);
+      setIsLoading(false);
       return;
     }
 
     if (previousTrackRef.current !== currentTrack) {
+      setIsLoading(true);
       audio.src = currentTrack.src;
       audio.currentTime = 0;
       previousTrackRef.current = currentTrack;
     }
 
     if (isPlaying) {
-      audio.play().catch(() => setIsPlaying(false));
+      audio.play().catch(() => {
+        setIsPlaying(false);
+        setIsLoading(false);
+      });
     } else {
       audio.pause();
     }
@@ -371,6 +378,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     currentIndex,
     currentTrack,
     isPlaying,
+    isLoading,
     isShuffle,
     isRepeat,
     addToQueue,
@@ -386,12 +394,32 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     toggleShuffle,
     toggleRepeat,
     audioRef,
-  }), [queue, currentIndex, currentTrack, isPlaying, isShuffle, isRepeat]);
+  }), [queue, currentIndex, currentTrack, isPlaying, isLoading, isShuffle, isRepeat]);
+
+  // Listen for canplay event to clear loading state
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleCanPlay = () => setIsLoading(false);
+    const handleWaiting = () => setIsLoading(true);
+    const handlePlaying = () => setIsLoading(false);
+
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('waiting', handleWaiting);
+    audio.addEventListener('playing', handlePlaying);
+
+    return () => {
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('waiting', handleWaiting);
+      audio.removeEventListener('playing', handlePlaying);
+    };
+  }, []);
 
   return (
     <AudioPlayerContext.Provider value={value}>
       {children}
-      <audio ref={audioRef} />
+      <audio ref={audioRef} preload="none" />
     </AudioPlayerContext.Provider>
   );
 };

@@ -16,6 +16,7 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
     currentTrack,
     currentIndex,
     isPlaying,
+    isLoading,
     isShuffle,
     isRepeat,
     prev,
@@ -188,9 +189,16 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
         )}>
           {showStatusLabel && (
             <div className="flex items-center gap-2">
-              <span className="text-micro uppercase tracking-editorial text-gold">
-                {isPlaying ? 'Now Playing' : 'Paused'}
-              </span>
+              {isLoading ? (
+                <span className="text-micro uppercase tracking-editorial text-gold flex items-center gap-2">
+                  <span className="inline-block w-3 h-3 border border-gold border-t-transparent rounded-full animate-spin" />
+                  Loading
+                </span>
+              ) : (
+                <span className="text-micro uppercase tracking-editorial text-gold">
+                  {isPlaying ? 'Now Playing' : 'Paused'}
+                </span>
+              )}
             </div>
           )}
           <p className="truncate font-serif text-charcoal dark:text-alabaster text-lg leading-tight">
