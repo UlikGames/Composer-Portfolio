@@ -404,7 +404,7 @@ export const WorksPage = () => {
 
                                             {/* Tags */}
                                             <div className="flex flex-wrap gap-2 mb-4">
-                                                {work.tags.slice(0, 3).map(tag => (
+                                                {work.tags.slice(0, 5).map(tag => (
                                                     <span
                                                         key={tag}
                                                         className="text-micro uppercase tracking-editorial text-warmGrey"

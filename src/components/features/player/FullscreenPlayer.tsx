@@ -19,6 +19,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
     const {
         currentTrack,
         isPlaying,
+        isLoading,
         isShuffle,
         isRepeat,
         queue,
@@ -753,9 +754,14 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                         <button
                             onClick={togglePlay}
                             className="p-4 sm:p-5 bg-alabaster text-charcoal rounded-full hover:scale-110 active:scale-95 transition-all duration-300 shadow-xl"
-                            aria-label={isPlaying ? 'Pause' : 'Play'}
+                            aria-label={isLoading ? 'Loading' : isPlaying ? 'Pause' : 'Play'}
                         >
-                            {isPlaying ? (
+                            {isLoading ? (
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-8 sm:h-8 animate-spin">
+                                    <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
+                                    <path d="M12 2a10 10 0 0 1 10 10" strokeLinecap="round" />
+                                </svg>
+                            ) : isPlaying ? (
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="sm:w-8 sm:h-8">
                                     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                                 </svg>
