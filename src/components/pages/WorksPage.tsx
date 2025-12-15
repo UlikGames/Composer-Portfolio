@@ -407,7 +407,7 @@ export const WorksPage = () => {
                                 {paginatedWorks.map((work, index) => (
                                     <article
                                         key={work.id}
-                                        className={`group border-t border-charcoal dark:border-alabaster/20 pt-8 animate-fade-in-up relative overflow-visible ${playMenuOpen === work.id ? 'z-50' : 'z-0'}`}
+                                        className={`group flex flex-col h-full border-t border-charcoal dark:border-alabaster/20 pt-8 animate-fade-in-up relative overflow-visible ${playMenuOpen === work.id ? 'z-50' : 'z-0'}`}
                                         style={{ animationDelay: `${Math.min(index * 50, 500)}ms` }}
                                     >
                                         {/* Image */}
@@ -427,7 +427,7 @@ export const WorksPage = () => {
                                         )}
 
                                         {/* Work Info */}
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col flex-1">
                                             <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 md:mb-2">
                                                 {work.year} · {work.instrumentation.join(', ')}
                                             </p>
@@ -451,7 +451,7 @@ export const WorksPage = () => {
                                             </div>
 
                                             {/* Actions */}
-                                            <div className="flex items-center gap-2 md:gap-6 relative flex-wrap" data-play-menu>
+                                            <div className="flex items-center gap-2 md:gap-6 relative flex-wrap mt-auto" data-play-menu>
                                                 {(work.audioUrl || (work.movements && work.movements.some(m => m.audioUrl))) && (
                                                     <>
                                                         <button
