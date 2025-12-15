@@ -5,7 +5,7 @@
 export interface Work {
   id: string;
   title: string;
-  year: number;
+  year: number | string;
   duration: number | string; // in minutes (number) or formatted string (e.g., "02:22")
   artist?: string; // Primary artist(s) credited for the work
   instrumentation: string[];

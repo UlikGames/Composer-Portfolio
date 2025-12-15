@@ -131,7 +131,7 @@ export const WorkCard = ({
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
-            {work.tags.slice(0, 3).map(tag => (
+            {work.tags.map(tag => (
               <span
                 key={tag}
                 className="text-micro uppercase tracking-editorial text-warmGrey"
