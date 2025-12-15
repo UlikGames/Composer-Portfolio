@@ -428,10 +428,10 @@ export const WorksPage = () => {
 
                                         {/* Work Info */}
                                         <div className="flex flex-col flex-1">
-                                            <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 md:mb-2">
+                                            <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 md:mb-2 truncate">
                                                 {work.year} · {work.instrumentation.join(', ')}
                                             </p>
-                                            <h3 className="font-serif text-lg md:text-2xl lg:text-3xl mb-2 md:mb-3 group-hover:text-gold transition-colors duration-500 leading-tight">
+                                            <h3 className="font-serif text-base md:text-2xl lg:text-3xl mb-2 md:mb-3 group-hover:text-gold transition-colors duration-500 leading-tight line-clamp-2 min-h-[2.5rem] md:min-h-[4rem]">
                                                 <Link to={`/works/${work.id}`}>{work.title}</Link>
                                             </h3>
                                             <p className="text-xs md:text-sm text-warmGrey mb-2 md:mb-4">
