@@ -419,7 +419,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AudioPlayerContext.Provider value={value}>
       {children}
-      <audio ref={audioRef} preload="none" />
+      <audio ref={audioRef} preload="auto" />
     </AudioPlayerContext.Provider>
   );
 };

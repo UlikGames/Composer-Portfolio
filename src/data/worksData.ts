@@ -1,13 +1,15 @@
 import { Work } from '@/types';
 
-// Cloudinary CDN base URL for audio files
-const CLOUDINARY_AUDIO_BASE = 'https://res.cloudinary.com/ddl0vgspj/raw/upload';
+// Backblaze B2 base URL for audio files
+const B2_AUDIO_BASE = 'https://f003.backblazeb2.com/file/composer-portfolio';
 
-// Helper to convert local audio path to a Cloudinary URL while leaving absolute URLs untouched
-const cloudinaryAudio = (path?: string) => {
-  if (!path || path.startsWith('http')) return path;
-  const normalizedPath = path.replace(/^\.?\//, '');
-  return `${CLOUDINARY_AUDIO_BASE}/${normalizedPath}`;
+// Helper to convert local audio path to a Backblaze B2 URL
+const b2Audio = (path?: string): string | undefined => {
+  if (!path) return undefined;
+  if (path.startsWith('http')) return path;
+  // Remove leading slash and convert to B2 path
+  const normalizedPath = path.replace(/^\//, '');
+  return `${B2_AUDIO_BASE}/${normalizedPath}`;
 };
 
 const worksData: Work[] = [
@@ -977,17 +979,17 @@ const worksData: Work[] = [
   },
 ];
 
-const applyCloudinaryAudio = (items: Work[]): Work[] =>
+const applyB2Audio = (items: Work[]): Work[] =>
   items.map(work => ({
     ...work,
-    audioUrl: cloudinaryAudio(work.audioUrl),
+    audioUrl: b2Audio(work.audioUrl),
     movements: work.movements?.map(movement => ({
       ...movement,
-      audioUrl: cloudinaryAudio(movement.audioUrl),
+      audioUrl: b2Audio(movement.audioUrl),
     })),
   }));
 
-export const works: Work[] = applyCloudinaryAudio(worksData);
+export const works: Work[] = applyB2Audio(worksData);
 
 // Helper functions
 export const getWorkById = (id: string): Work | undefined => {
