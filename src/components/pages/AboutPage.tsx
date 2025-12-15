@@ -42,8 +42,8 @@ export const AboutPage = () => {
                         {/* Portrait */}
                         <div className="md:col-span-5 md:col-start-1">
                             <div className="relative aspect-[3/4] overflow-hidden shadow-luxury-lg group">
-                                <div className="w-full h-full bg-taupe flex items-center justify-center">
-                                    <span className="font-serif text-9xl text-charcoal/10">UN</span>
+                                <div className="w-full h-full bg-taupe dark:bg-charcoal/50 flex items-center justify-center">
+                                    <span className="font-serif text-9xl text-charcoal/10 dark:text-alabaster/10">UN</span>
                                 </div>
                                 {/* Inner Border */}
                                 <div className="absolute inset-0 shadow-inner-border pointer-events-none" />
@@ -181,7 +181,7 @@ export const AboutPage = () => {
             {/* ============================================
           CTA SECTION
           ============================================ */}
-            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 bg-taupe">
+            <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 bg-taupe dark:bg-charcoal/80">
                 <div className="max-w-luxury mx-auto">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
                         <div>
