@@ -486,6 +486,76 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  // Media Session API - enables hardware media keys and OS media controls
+  // Works even when the browser tab is not focused (alt-tabbed away)
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return;
+
+    // Set action handlers for media keys
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (queue.length === 0 && isShuffle) {
+        primeQueueWithRandomTrack();
+      } else {
+        setIsPlaying(true);
+      }
+    });
+
+    navigator.mediaSession.setActionHandler('pause', () => {
+      setIsPlaying(false);
+    });
+
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      prev();
+    });
+
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      next();
+    });
+
+    // Optional: seek handlers for scrubbing
+    navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+      const audio = audioRef.current;
+      if (audio) {
+        audio.currentTime = Math.max(audio.currentTime - (details.seekOffset || 10), 0);
+      }
+    });
+
+    navigator.mediaSession.setActionHandler('seekforward', (details) => {
+      const audio = audioRef.current;
+      if (audio) {
+        audio.currentTime = Math.min(audio.currentTime + (details.seekOffset || 10), audio.duration || 0);
+      }
+    });
+
+    return () => {
+      // Clean up handlers on unmount
+      navigator.mediaSession.setActionHandler('play', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+      navigator.mediaSession.setActionHandler('previoustrack', null);
+      navigator.mediaSession.setActionHandler('nexttrack', null);
+      navigator.mediaSession.setActionHandler('seekbackward', null);
+      navigator.mediaSession.setActionHandler('seekforward', null);
+    };
+  }, [next, prev, queue.length, isShuffle, primeQueueWithRandomTrack]);
+
+  // Update Media Session metadata when track changes
+  useEffect(() => {
+    if (!('mediaSession' in navigator) || !currentTrack) return;
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: currentTrack.title,
+      artist: 'Batur Taştan', // Your name as the composer
+      album: 'Portfolio',
+    });
+  }, [currentTrack]);
+
+  // Update Media Session playback state
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return;
+
+    navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+  }, [isPlaying]);
+
   return (
     <AudioPlayerContext.Provider value={value}>
       {children}
