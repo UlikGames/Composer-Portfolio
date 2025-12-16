@@ -1,9 +1,36 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, ReactNode } from 'react';
 import { works } from '@/data/worksData';
 
+// Backblaze B2 base URL for audio files
+const B2_AUDIO_BASE = 'https://f003.backblazeb2.com/file/composer-portfolio';
+
+// Flag to track if B2 is available (false when bandwidth limit is hit)
+let useB2 = true;
+
+// Convert a local audio path to B2 URL
+const toB2Url = (localPath: string): string => {
+  if (localPath.startsWith('http')) return localPath;
+  const normalizedPath = localPath.replace(/^\//, '');
+  return `${B2_AUDIO_BASE}/${normalizedPath}`;
+};
+
+// Get the best available URL for an audio source
+const getAudioUrl = (src: string): string => {
+  // Already a full URL
+  if (src.startsWith('http')) {
+    // If it's a B2 URL and B2 is disabled, convert back to local
+    if (!useB2 && src.startsWith(B2_AUDIO_BASE)) {
+      return src.replace(B2_AUDIO_BASE, '');
+    }
+    return src;
+  }
+  // Local path - use B2 if available
+  return useB2 ? toB2Url(src) : src;
+};
+
 export interface AudioTrack {
   title: string;
-  src: string;
+  src: string; // This stores the original/local path
 }
 
 const libraryTracks: AudioTrack[] = (() => {
@@ -89,7 +116,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
 
     if (previousTrackRef.current !== currentTrack) {
       setIsLoading(true);
-      audio.src = currentTrack.src;
+      audio.src = getAudioUrl(currentTrack.src);
       audio.currentTime = 0;
       previousTrackRef.current = currentTrack;
     }
@@ -104,6 +131,48 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       audio.pause();
     }
   }, [currentTrack, isPlaying]);
+
+  // Handle audio errors - fallback from B2 to local on bandwidth limit
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleError = () => {
+      // If we're using B2 and got an error, try falling back to local
+      if (useB2 && currentTrack) {
+        console.warn('B2 audio failed, falling back to local URLs');
+        useB2 = false;
+
+        // Set new source and load
+        const localUrl = getAudioUrl(currentTrack.src);
+        audio.src = localUrl;
+
+        // Force play after the new source loads and sync state
+        const playOnLoad = () => {
+          audio.play()
+            .then(() => {
+              setIsPlaying(true); // Sync state to playing
+              setIsLoading(false);
+            })
+            .catch(() => {
+              setIsPlaying(false);
+              setIsLoading(false);
+            });
+          audio.removeEventListener('canplay', playOnLoad);
+        };
+
+        audio.addEventListener('canplay', playOnLoad);
+        audio.load();
+      } else {
+        // Real error - not a B2 fallback situation
+        setIsPlaying(false);
+        setIsLoading(false);
+      }
+    };
+
+    audio.addEventListener('error', handleError);
+    return () => audio.removeEventListener('error', handleError);
+  }, [currentTrack]);
 
   useEffect(() => {
     currentIndexRef.current = currentIndex;
