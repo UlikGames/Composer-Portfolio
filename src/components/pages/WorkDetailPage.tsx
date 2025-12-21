@@ -161,7 +161,10 @@ export const WorkDetailPage = () => {
                         {/* Image */}
                         <div className="md:col-span-5">
                             {(work.imageUrl || work.thumbnailUrl) && (
-                                <div className="relative aspect-[3/4] overflow-hidden shadow-luxury-lg group">
+                                <div
+                                    className="relative aspect-[3/4] overflow-hidden shadow-luxury-lg group cursor-pointer"
+                                    onClick={handlePosterClick}
+                                >
                                     <img
                                         src={work.imageUrl || work.thumbnailUrl}
                                         alt={work.title}
@@ -190,8 +193,12 @@ export const WorkDetailPage = () => {
                             </p>
 
                             {/* Title */}
-                            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6">
+                            <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${isThreeNocturnes && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
                                 {work.title}
+                                {/* Easter Egg 4: April 5 special element */}
+                                {isThreeNocturnes && isSpecialDate && (
+                                    <span className="ml-2 inline-block animate-bounce" title="Happy Birthday ✧">✧</span>
+                                )}
                             </h1>
 
                             {/* Artist */}
@@ -348,6 +355,36 @@ export const WorkDetailPage = () => {
                         </div>
                     </div>
                 </section>
+            )}
+            {/* ============================================
+               EASTER EGG MODAL
+               ============================================ */}
+            {showEasterEgg && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/90 dark:bg-black/90 backdrop-blur-sm animate-fade-in"
+                    onClick={() => setShowEasterEgg(false)}
+                >
+                    <div
+                        className="max-w-lg mx-4 p-8 md:p-12 bg-alabaster dark:bg-charcoal border border-gold/30 text-center shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Decorative star */}
+                        <div className="text-gold text-3xl mb-6 animate-pulse">✧</div>
+
+                        {/* Message - placeholder for now */}
+                        <p className="font-serif text-xl md:text-2xl leading-relaxed text-charcoal dark:text-alabaster mb-4">
+                            [Your dedication message here]
+                        </p>
+                        <p className="text-warmGrey text-sm italic mb-8">
+                            [Additional message - placeholder for now]
+                        </p>
+
+                        {/* Close hint */}
+                        <p className="text-micro uppercase tracking-editorial text-warmGrey/60">
+                            Click anywhere to close
+                        </p>
+                    </div>
+                </div>
             )}
         </div>
     );
