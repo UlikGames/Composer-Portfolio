@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getWorkById } from '@/data/worksData';
 import { useAudioPlayer } from '@/context/AudioPlayerContext';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Editorial Work Detail Page
@@ -10,6 +11,71 @@ export const WorkDetailPage = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { playTrackNow, addToQueue, currentTrack, isPlaying, togglePlay } = useAudioPlayer();
+
+    // Easter egg states for "three-nocturnes"
+    const [showEasterEgg, setShowEasterEgg] = useState(false);
+    const keySequenceRef = useRef('');
+    const clickCountRef = useRef(0);
+    const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const isThreeNocturnes = id === 'three-nocturnes';
+    const isSpecialDate = new Date().getMonth() === 3 && new Date().getDate() === 5; // April 5
+
+    // Easter Egg 1: Console message on page load
+    useEffect(() => {
+        if (isThreeNocturnes) {
+            console.log(
+                '%c✧ A hidden message awaits... ✧',
+                'color: #d4af37; font-size: 14px; font-family: serif;'
+            );
+            console.log(
+                '%c[Your message here - placeholder for now]',
+                'color: #888; font-size: 12px; font-style: italic;'
+            );
+        }
+    }, [isThreeNocturnes]);
+
+    // Easter Egg 2: Typing "HANDE" reveals message
+    useEffect(() => {
+        if (!isThreeNocturnes) return;
+
+        const handleKeyPress = (e: KeyboardEvent) => {
+            keySequenceRef.current += e.key.toUpperCase();
+
+            // Keep only last 5 characters
+            if (keySequenceRef.current.length > 5) {
+                keySequenceRef.current = keySequenceRef.current.slice(-5);
+            }
+
+            if (keySequenceRef.current === 'HANDE') {
+                setShowEasterEgg(true);
+                keySequenceRef.current = '';
+            }
+        };
+
+        window.addEventListener('keypress', handleKeyPress);
+        return () => window.removeEventListener('keypress', handleKeyPress);
+    }, [isThreeNocturnes]);
+
+    // Easter Egg 3: Triple-click on poster
+    const handlePosterClick = () => {
+        if (!isThreeNocturnes) return;
+
+        clickCountRef.current += 1;
+
+        if (clickTimerRef.current) {
+            clearTimeout(clickTimerRef.current);
+        }
+
+        clickTimerRef.current = setTimeout(() => {
+            clickCountRef.current = 0;
+        }, 500);
+
+        if (clickCountRef.current >= 3) {
+            setShowEasterEgg(true);
+            clickCountRef.current = 0;
+        }
+    };
 
     const work = id ? getWorkById(id) : undefined;
 
