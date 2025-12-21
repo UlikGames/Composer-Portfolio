@@ -24,14 +24,8 @@ export const WorkDetailPage = () => {
     // Easter Egg 1: Console message on page load
     useEffect(() => {
         if (isThreeNocturnes) {
-            console.log(
-                '%c✧ A hidden message awaits... ✧',
-                'color: #d4af37; font-size: 14px; font-family: serif;'
-            );
-            console.log(
-                '%c[Your message here - placeholder for now]',
-                'color: #888; font-size: 12px; font-style: italic;'
-            );
+            console.log('%c✧ A hidden message awaits... ✧', 'color: #d4af37; font-size: 14px; font-family: serif;');
+            console.log('%cIf you typed her name, you already know why this exists.', 'color:#888; font-size:12px; font-style:italic;');
         }
     }, [isThreeNocturnes]);
 
@@ -197,7 +191,7 @@ export const WorkDetailPage = () => {
                                 {work.title}
                                 {/* Easter Egg 4: April 5 special element */}
                                 {isThreeNocturnes && isSpecialDate && (
-                                    <span className="ml-2 inline-block animate-bounce" title="Happy Birthday ✧">✧</span>
+                                    <span className="ml-2 inline-block animate-bounce" title="Wherever you are today, I hope you’re surrounded by light ✧">✧</span>
                                 )}
                             </h1>
 
@@ -373,10 +367,10 @@ export const WorkDetailPage = () => {
 
                         {/* Message - placeholder for now */}
                         <p className="font-serif text-xl md:text-2xl leading-relaxed text-charcoal dark:text-alabaster mb-4">
-                            [Your dedication message here]
+                            For my missing Hande.
                         </p>
                         <p className="text-warmGrey text-sm italic mb-8">
-                            [Additional message - placeholder for now]
+                            I’ll keep the distance you asked for. I just needed one page where you still exist.
                         </p>
 
                         {/* Close hint */}
