@@ -556,6 +556,47 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
   }, [isPlaying]);
 
+  // Easter Egg: Console message when Three Nocturnes tracks play (works from shuffle, queue, anywhere)
+  const threeNocturnesLoggedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!currentTrack || !isPlaying) return;
+
+    // Check if this is a Three Nocturnes track
+    const isThreeNocturnes = currentTrack.src.includes('three-nocturnes');
+
+    // Only log once per track (don't spam on pause/resume)
+    if (isThreeNocturnes && threeNocturnesLoggedRef.current !== currentTrack.src) {
+      threeNocturnesLoggedRef.current = currentTrack.src;
+
+      const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧     ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │T H R E E   N O C T U R N E S│                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Some melodies are written for one person,          ║
+║           even if that person never hears them."             ║
+║                                                              ║
+║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+      const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+      console.log(asciiArt, styles);
+      console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+      console.log('%c', 'font-size: 1px;'); // spacer
+    }
+
+    // Reset when track changes to something else
+    if (!isThreeNocturnes) {
+      threeNocturnesLoggedRef.current = null;
+    }
+  }, [currentTrack, isPlaying]);
+
   return (
     <AudioPlayerContext.Provider value={value}>
       {children}

@@ -21,13 +21,41 @@ export const WorkDetailPage = () => {
     const isThreeNocturnes = id === 'three-nocturnes';
     const isSpecialDate = new Date().getMonth() === 3 && new Date().getDate() === 5; // April 5
 
+    // Console ASCII art for Three Nocturnes
+    const logThreeNocturnesEasterEgg = () => {
+        const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧     ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │T H R E E   N O C T U R N E S│                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Some melodies are written for one person,          ║
+║           even if that person never hears them."             ║
+║                                                              ║
+║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+        const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+        console.log(asciiArt, styles);
+        console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+        console.log('%c', 'font-size: 1px;'); // spacer
+    };
+
     // Easter Egg 1: Console message on page load
+    const pageLoadLoggedRef = useRef(false);
     useEffect(() => {
-        if (isThreeNocturnes) {
-            console.log('%c✧ A hidden message awaits... ✧', 'color: #d4af37; font-size: 14px; font-family: serif;');
-            console.log('%cIf you typed her name, you already know why this exists.', 'color:#888; font-size:12px; font-style:italic;');
+        if (isThreeNocturnes && !pageLoadLoggedRef.current) {
+            pageLoadLoggedRef.current = true;
+            logThreeNocturnesEasterEgg();
         }
     }, [isThreeNocturnes]);
+
+
 
     // Easter Egg 2: Typing "HANDE" reveals message
     useEffect(() => {
