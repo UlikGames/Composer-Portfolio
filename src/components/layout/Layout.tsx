@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { LayoutProps } from '@/types';
@@ -11,8 +12,30 @@ import { BackToTop } from '@/components/ui/BackToTop';
  * Wraps all pages with header, footer, and decorative elements
  */
 export const Layout = ({ children }: LayoutProps) => {
+  const navigate = useNavigate();
   const [isFooterVisible, setFooterVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const keySequenceRef = useRef('');
+
+  // Global Easter Egg: Typing "HANDE" anywhere navigates to hidden page
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      keySequenceRef.current += e.key.toUpperCase();
+
+      // Keep only last 5 characters
+      if (keySequenceRef.current.length > 5) {
+        keySequenceRef.current = keySequenceRef.current.slice(-5);
+      }
+
+      if (keySequenceRef.current === 'HANDE') {
+        navigate('/hande');
+        keySequenceRef.current = '';
+      }
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
+  }, [navigate]);
 
   const setFooterRef = useCallback((node: HTMLElement | null) => {
     if (observerRef.current) {

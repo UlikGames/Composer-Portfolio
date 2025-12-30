@@ -556,17 +556,18 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
   }, [isPlaying]);
 
-  // Easter Egg: Console message when Three Nocturnes tracks play (works from shuffle, queue, anywhere)
-  const threeNocturnesLoggedRef = useRef<string | null>(null);
+  // Easter Egg: Console message when special tracks play (works from shuffle, queue, anywhere)
+  const easterEggLoggedRef = useRef<string | null>(null);
   useEffect(() => {
     if (!currentTrack || !isPlaying) return;
 
-    // Check if this is a Three Nocturnes track
+    // Check if this is a special track
     const isThreeNocturnes = currentTrack.src.includes('three-nocturnes');
+    const isLinconnue = currentTrack.src.includes('linconnue');
 
     // Only log once per track (don't spam on pause/resume)
-    if (isThreeNocturnes && threeNocturnesLoggedRef.current !== currentTrack.src) {
-      threeNocturnesLoggedRef.current = currentTrack.src;
+    if (isThreeNocturnes && easterEggLoggedRef.current !== currentTrack.src) {
+      easterEggLoggedRef.current = currentTrack.src;
 
       const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
@@ -591,9 +592,35 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       console.log('%c', 'font-size: 1px;'); // spacer
     }
 
+    if (isLinconnue && easterEggLoggedRef.current !== currentTrack.src) {
+      easterEggLoggedRef.current = currentTrack.src;
+
+      const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦     ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │    L ' I N C O N N U E      │                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Twelve pieces for someone I never met,             ║
+║           but somehow already knew."                         ║
+║                                                              ║
+║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+      const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+      console.log(asciiArt, styles);
+      console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+      console.log('%c', 'font-size: 1px;'); // spacer
+    }
+
     // Reset when track changes to something else
-    if (!isThreeNocturnes) {
-      threeNocturnesLoggedRef.current = null;
+    if (!isThreeNocturnes && !isLinconnue) {
+      easterEggLoggedRef.current = null;
     }
   }, [currentTrack, isPlaying]);
 

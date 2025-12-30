@@ -15,6 +15,7 @@ const WorksPage = lazy(() => import('@/components/pages/WorksPage').then(module 
 const WorkDetailPage = lazy(() => import('@/components/pages/WorkDetailPage').then(module => ({ default: module.WorkDetailPage })));
 const ContactPage = lazy(() => import('@/components/pages/ContactPage').then(module => ({ default: module.ContactPage })));
 const NotFoundPage = lazy(() => import('@/components/pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
+const EchoPage = lazy(() => import('@/components/pages/EchoPage').then(module => ({ default: module.EchoPage })));
 
 // Routes component with page transitions
 function AppRoutes() {
@@ -27,6 +28,7 @@ function AppRoutes() {
           <Route path="/works" element={<WorksPage />} />
           <Route path="/works/:id" element={<WorkDetailPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/hande" element={<EchoPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </RouteTransition>

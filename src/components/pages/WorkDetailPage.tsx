@@ -12,16 +12,16 @@ export const WorkDetailPage = () => {
     const navigate = useNavigate();
     const { playTrackNow, addToQueue, currentTrack, isPlaying, togglePlay } = useAudioPlayer();
 
-    // Easter egg states for "three-nocturnes"
+    // Easter egg states for special pieces
     const [showEasterEgg, setShowEasterEgg] = useState(false);
-    const keySequenceRef = useRef('');
     const clickCountRef = useRef(0);
     const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const isThreeNocturnes = id === 'three-nocturnes';
+    const isLinconnue = id === 'linconnue';
     const isSpecialDate = new Date().getMonth() === 3 && new Date().getDate() === 5; // April 5
 
-    // Console ASCII art for Three Nocturnes
+    // Console ASCII art for special pieces
     const logThreeNocturnesEasterEgg = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
@@ -46,42 +46,47 @@ export const WorkDetailPage = () => {
         console.log('%c', 'font-size: 1px;'); // spacer
     };
 
-    // Easter Egg 1: Console message on page load
+    const logLinconnueEasterEgg = () => {
+        const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦     ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │    L ' I N C O N N U E      │                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Twelve pieces for someone I never met,             ║
+║           but somehow already knew."                         ║
+║                                                              ║
+║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+        const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+        console.log(asciiArt, styles);
+        console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+        console.log('%c', 'font-size: 1px;'); // spacer
+    };
+
+    // Easter Egg 1: Console message on page load for special pieces
     const pageLoadLoggedRef = useRef(false);
     useEffect(() => {
-        if (isThreeNocturnes && !pageLoadLoggedRef.current) {
-            pageLoadLoggedRef.current = true;
-            logThreeNocturnesEasterEgg();
+        if (!pageLoadLoggedRef.current) {
+            if (isThreeNocturnes) {
+                pageLoadLoggedRef.current = true;
+                logThreeNocturnesEasterEgg();
+            } else if (isLinconnue) {
+                pageLoadLoggedRef.current = true;
+                logLinconnueEasterEgg();
+            }
         }
-    }, [isThreeNocturnes]);
+    }, [isThreeNocturnes, isLinconnue]);
 
-
-
-    // Easter Egg 2: Typing "HANDE" reveals message
-    useEffect(() => {
-        if (!isThreeNocturnes) return;
-
-        const handleKeyPress = (e: KeyboardEvent) => {
-            keySequenceRef.current += e.key.toUpperCase();
-
-            // Keep only last 5 characters
-            if (keySequenceRef.current.length > 5) {
-                keySequenceRef.current = keySequenceRef.current.slice(-5);
-            }
-
-            if (keySequenceRef.current === 'HANDE') {
-                setShowEasterEgg(true);
-                keySequenceRef.current = '';
-            }
-        };
-
-        window.addEventListener('keypress', handleKeyPress);
-        return () => window.removeEventListener('keypress', handleKeyPress);
-    }, [isThreeNocturnes]);
-
-    // Easter Egg 3: Triple-click on poster
+    // Easter Egg 2: Triple-click on poster (works for both special pieces)
     const handlePosterClick = () => {
-        if (!isThreeNocturnes) return;
+        if (!isThreeNocturnes && !isLinconnue) return;
 
         clickCountRef.current += 1;
 
@@ -215,10 +220,10 @@ export const WorkDetailPage = () => {
                             </p>
 
                             {/* Title */}
-                            <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${isThreeNocturnes && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
+                            <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${(isThreeNocturnes || isLinconnue) && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
                                 {work.title}
                                 {/* Easter Egg 4: April 5 special element */}
-                                {isThreeNocturnes && isSpecialDate && (
+                                {(isThreeNocturnes || isLinconnue) && isSpecialDate && (
                                     <span className="ml-2 inline-block animate-bounce" title="Wherever you are today, I hope you’re surrounded by light ✧">✧</span>
                                 )}
                             </h1>
