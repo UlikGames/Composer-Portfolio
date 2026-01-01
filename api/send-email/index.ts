@@ -1,5 +1,10 @@
 import { Resend } from 'resend';
 
+// Configure as Edge Function for Vercel
+export const config = {
+  runtime: 'edge',
+};
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Vercel serverless function handler
