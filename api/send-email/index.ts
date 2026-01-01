@@ -20,29 +20,29 @@ export default async function handler(req: Request) {
   if (req.method !== 'POST') {
     return new Response(
       JSON.stringify({ error: 'Method not allowed' }),
-      { 
-        status: 405, 
-        headers: { 
+      {
+        status: 405,
+        headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-        } 
+        }
       }
     );
   }
 
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, subject, message } = await req.json();
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
-        { 
-          status: 400, 
-          headers: { 
+        {
+          status: 400,
+          headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-          } 
+          }
         }
       );
     }
@@ -52,12 +52,12 @@ export default async function handler(req: Request) {
     if (!emailRegex.test(email)) {
       return new Response(
         JSON.stringify({ error: 'Invalid email address' }),
-        { 
-          status: 400, 
-          headers: { 
+        {
+          status: 400,
+          headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-          } 
+          }
         }
       );
     }
@@ -67,12 +67,12 @@ export default async function handler(req: Request) {
       console.error('RESEND_API_KEY is not configured');
       return new Response(
         JSON.stringify({ error: 'Email service is not configured. Please contact the site administrator.' }),
-        { 
-          status: 500, 
-          headers: { 
+        {
+          status: 500,
+          headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-          } 
+          }
         }
       );
     }
@@ -86,7 +86,7 @@ export default async function handler(req: Request) {
       from: `Portfolio Contact Form <${fromEmail}>`,
       to: [recipientEmail],
       replyTo: email,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `[${String(subject).replace(/</g, '&lt;').replace(/>/g, '&gt;')}] New message from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #f2b90d; border-bottom: 2px solid #f2b90d; padding-bottom: 10px;">
@@ -96,6 +96,7 @@ export default async function handler(req: Request) {
           <div style="margin-top: 20px;">
             <p><strong>Name:</strong> ${String(name).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             <p><strong>Email:</strong> <a href="mailto:${email}">${String(email).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a></p>
+            <p><strong>Subject:</strong> ${String(subject).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
           </div>
           
           <div style="margin-top: 20px; padding: 15px; background-color: #f8f8f5; border-left: 4px solid #f2b90d;">
@@ -113,6 +114,7 @@ New Contact Form Submission
 
 Name: ${name}
 Email: ${email}
+Subject: ${subject}
 
 Message:
 ${message}
@@ -126,36 +128,36 @@ This email was sent from your portfolio contact form.
       console.error('Resend error:', error);
       return new Response(
         JSON.stringify({ error: 'Failed to send email', details: error.message }),
-        { 
-          status: 500, 
-          headers: { 
+        {
+          status: 500,
+          headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-          } 
+          }
         }
       );
     }
 
     return new Response(
       JSON.stringify({ success: true, messageId: data?.id }),
-      { 
-        status: 200, 
-        headers: { 
+      {
+        status: 200,
+        headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-        } 
+        }
       }
     );
   } catch (error) {
     console.error('Error processing request:', error);
     return new Response(
       JSON.stringify({ error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' }),
-      { 
-        status: 500, 
-        headers: { 
+      {
+        status: 500,
+        headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-        } 
+        }
       }
     );
   }
