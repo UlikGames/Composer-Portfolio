@@ -27,7 +27,7 @@ export const WorkDetailPage = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ║              ╭─────────────────────────────╮                 ║
 ║              │T H R E E   N O C T U R N E S│                 ║
@@ -36,7 +36,7 @@ export const WorkDetailPage = () => {
 ║          "Some melodies are written for one person,          ║
 ║           even if that person never hears them."             ║
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
 
@@ -51,7 +51,7 @@ export const WorkDetailPage = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ║              ╭─────────────────────────────╮                 ║
 ║              │    L ' I N C O N N U E      │                 ║
@@ -60,7 +60,7 @@ export const WorkDetailPage = () => {
 ║          "Twelve pieces for someone I never met,             ║
 ║           but somehow already knew."                         ║
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
 
@@ -75,7 +75,7 @@ export const WorkDetailPage = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ║              ╭─────────────────────────────╮                 ║
 ║              │   I M A G E S   D ' E L L E │                 ║
@@ -84,7 +84,7 @@ export const WorkDetailPage = () => {
 ║          "Two images of someone I carry with me,             ║
 ║           her presence, and her mystery."                    ║
 ║                                                              ║
-║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡         ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
 

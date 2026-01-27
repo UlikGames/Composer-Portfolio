@@ -269,8 +269,8 @@ const worksData: Work[] = [
     instrumentation: ['Piano Solo'],
     tags: ['Piano Solo', 'Romantic', 'Dramatic'],
     scoreAvailability: 'request',
-    imageUrl: '/images/works/images-d-elle/poster.jpg',
-    thumbnailUrl: '/images/works/images-d-elle/poster.jpg',
+    imageUrl: '/images/works/images-d-elle/poster.png',
+    thumbnailUrl: '/images/works/images-d-elle/poster.png',
     isFeatured: true,
     movements: [
       { title: 'Sa Présence', duration: '01:12', audioUrl: '/audio/images-d-elle/1.mp3' },
