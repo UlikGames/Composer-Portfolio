@@ -11,6 +11,7 @@ import { Work } from '@/types';
 export const EchoPage = () => {
     const threeNocturnes = getWorkById('three-nocturnes');
     const linconnue = getWorkById('linconnue');
+    const imagesElle = getWorkById('images-d-elle');
     const { playTrackNow, addToQueue } = useAudioPlayer();
     const [playMenuOpen, setPlayMenuOpen] = useState<string | null>(null);
 
@@ -36,7 +37,7 @@ export const EchoPage = () => {
         };
     }, [playMenuOpen]);
 
-    const specialWorks = [threeNocturnes, linconnue].filter(Boolean) as Work[];
+    const specialWorks = [threeNocturnes, linconnue, imagesElle].filter(Boolean) as Work[];
 
     const getPlayableMovements = (work: Work) => {
         return (work.movements ?? [])

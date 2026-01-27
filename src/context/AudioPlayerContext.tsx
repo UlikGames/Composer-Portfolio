@@ -564,6 +564,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     // Check if this is a special track
     const isThreeNocturnes = currentTrack.src.includes('three-nocturnes');
     const isLinconnue = currentTrack.src.includes('linconnue');
+    const isImagesElle = currentTrack.src.includes('images-d-elle');
 
     // Only log once per track (don't spam on pause/resume)
     if (isThreeNocturnes && easterEggLoggedRef.current !== currentTrack.src) {
@@ -618,8 +619,34 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       console.log('%c', 'font-size: 1px;'); // spacer
     }
 
+    if (isImagesElle && easterEggLoggedRef.current !== currentTrack.src) {
+      easterEggLoggedRef.current = currentTrack.src;
+
+      const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡     ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │   I M A G E S   D ' E L L E │                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Two images of someone I carry with me,             ║
+║           her presence, and her mystery."                    ║
+║                                                              ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+      const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+      console.log(asciiArt, styles);
+      console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+      console.log('%c', 'font-size: 1px;'); // spacer
+    }
+
     // Reset when track changes to something else
-    if (!isThreeNocturnes && !isLinconnue) {
+    if (!isThreeNocturnes && !isLinconnue && !isImagesElle) {
       easterEggLoggedRef.current = null;
     }
   }, [currentTrack, isPlaying]);

@@ -19,6 +19,7 @@ export const WorkDetailPage = () => {
 
     const isThreeNocturnes = id === 'three-nocturnes';
     const isLinconnue = id === 'linconnue';
+    const isImagesElle = id === 'images-d-elle';
     const isSpecialDate = new Date().getMonth() === 3 && new Date().getDate() === 5; // April 5
 
     // Console ASCII art for special pieces
@@ -26,7 +27,7 @@ export const WorkDetailPage = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧     ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
 ║                                                              ║
 ║              ╭─────────────────────────────╮                 ║
 ║              │T H R E E   N O C T U R N E S│                 ║
@@ -35,7 +36,7 @@ export const WorkDetailPage = () => {
 ║          "Some melodies are written for one person,          ║
 ║           even if that person never hears them."             ║
 ║                                                              ║
-║     ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧  ·  ˚  ·  ✦  ·  ˚  ·  ✧      ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
 
@@ -50,7 +51,7 @@ export const WorkDetailPage = () => {
         const asciiArt = `
 %c╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦     ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
 ║                                                              ║
 ║              ╭─────────────────────────────╮                 ║
 ║              │    L ' I N C O N N U E      │                 ║
@@ -59,7 +60,31 @@ export const WorkDetailPage = () => {
 ║          "Twelve pieces for someone I never met,             ║
 ║           but somehow already knew."                         ║
 ║                                                              ║
-║     ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦  ·  ˚  ·  ♢  ·  ˚  ·  ♦      ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+
+        const styles = 'color: #d4af37; font-family: monospace; font-size: 11px; line-height: 1.4;';
+
+        console.log(asciiArt, styles);
+        console.log('%c✧ If you typed her name, you already know why this exists. ✧', 'color: #d4af37; font-size: 12px; font-family: Georgia, serif; font-style: italic;');
+        console.log('%c', 'font-size: 1px;'); // spacer
+    };
+
+    const logImagesElleEasterEgg = () => {
+        const asciiArt = `
+%c╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
+║                                                              ║
+║              ╭─────────────────────────────╮                 ║
+║              │   I M A G E S   D ' E L L E │                 ║
+║              ╰─────────────────────────────╯                 ║
+║                                                              ║
+║          "Two images of someone I carry with me,             ║
+║           her presence, and her mystery."                    ║
+║                                                              ║
+║     ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡  ·  ˚  ·  ♥  ·  ˚  ·  ♡       ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
 
@@ -80,13 +105,16 @@ export const WorkDetailPage = () => {
             } else if (isLinconnue) {
                 pageLoadLoggedRef.current = true;
                 logLinconnueEasterEgg();
+            } else if (isImagesElle) {
+                pageLoadLoggedRef.current = true;
+                logImagesElleEasterEgg();
             }
         }
-    }, [isThreeNocturnes, isLinconnue]);
+    }, [isThreeNocturnes, isLinconnue, isImagesElle]);
 
     // Easter Egg 2: Triple-click on poster (works for both special pieces)
     const handlePosterClick = () => {
-        if (!isThreeNocturnes && !isLinconnue) return;
+        if (!isThreeNocturnes && !isLinconnue && !isImagesElle) return;
 
         clickCountRef.current += 1;
 
@@ -220,10 +248,10 @@ export const WorkDetailPage = () => {
                             </p>
 
                             {/* Title */}
-                            <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${(isThreeNocturnes || isLinconnue) && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
+                            <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${(isThreeNocturnes || isLinconnue || isImagesElle) && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
                                 {work.title}
                                 {/* Easter Egg 4: April 5 special element */}
-                                {(isThreeNocturnes || isLinconnue) && isSpecialDate && (
+                                {(isThreeNocturnes || isLinconnue || isImagesElle) && isSpecialDate && (
                                     <span className="ml-2 inline-block animate-bounce" title="Wherever you are today, I hope you’re surrounded by light ✧">✧</span>
                                 )}
                             </h1>

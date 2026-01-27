@@ -261,6 +261,23 @@ const worksData: Work[] = [
     isFeatured: true,
   },
   {
+    id: 'images-d-elle',
+    title: 'Images d\u2019elle',
+    year: 2025,
+    duration: "03:09",
+    artist: "Ulvin Najafov",
+    instrumentation: ['Piano Solo'],
+    tags: ['Piano Solo', 'Romantic', 'Dramatic'],
+    scoreAvailability: 'request',
+    imageUrl: '/images/works/images-d-elle/poster.jpg',
+    thumbnailUrl: '/images/works/images-d-elle/poster.jpg',
+    isFeatured: true,
+    movements: [
+      { title: 'Sa Présence', duration: '01:12', audioUrl: '/audio/images-d-elle/1.mp3' },
+      { title: 'Le Mystère d\'Elle', duration: '01:57', audioUrl: '/audio/images-d-elle/2.mp3' },
+    ],
+  },
+  {
     id: 'incubo-notturno',
     title: 'Incubo Notturno',
     year: 2025,
