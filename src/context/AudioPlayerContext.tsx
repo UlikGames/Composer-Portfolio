@@ -306,8 +306,13 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    // Normal mode at end of queue - do nothing
-  }, [queue, currentIndex, isShuffle]);
+    // Normal mode at end of queue - reset to beginning and pause
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+    }
+    setIsPlaying(false);
+  }, [queue, currentIndex, isShuffle, audioRef]);
 
   const prev = useCallback(() => {
     const now = Date.now();
