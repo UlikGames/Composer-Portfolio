@@ -198,10 +198,18 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
               ) : isQueueEnded ? (
                 <button
                   onClick={toggleShuffle}
-                  className="text-micro uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-1 group"
+                  className="text-micro uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-1.5 group"
+                  title="Click to shuffle all tracks"
                 >
-                  Queue ended ·{' '}
-                  <span className="underline underline-offset-2 group-hover:no-underline">Shuffle All ♪</span>
+                  <span>Ended</span>
+                  <span className="text-gold/60 hidden sm:inline">·</span>
+                  <span className="flex items-center gap-1 underline underline-offset-2 group-hover:no-underline">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="hidden sm:inline">
+                      <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z" />
+                    </svg>
+                    <span className="hidden sm:inline">Shuffle</span>
+                    <span className="sm:hidden">♪</span>
+                  </span>
                 </button>
               ) : (
                 <span className="text-micro uppercase tracking-editorial text-gold">

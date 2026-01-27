@@ -22,6 +22,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
         isLoading,
         isShuffle,
         isRepeat,
+        isQueueEnded,
         queue,
         currentIndex,
         prev,
@@ -711,17 +712,44 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                     "md:items-start md:text-left md:flex-1"
                 )}>
                     {/* Now Playing Status */}
-                    <div className="flex items-center gap-2 mb-4">
-                        {isPlaying && (
-                            <span className="flex gap-0.5">
-                                <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-                                <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-                                <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
-                            </span>
+                    <div className="flex items-center gap-3 mb-4">
+                        {isLoading ? (
+                            <>
+                                <span className="inline-block w-4 h-4 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+                                <span className="text-sm uppercase tracking-editorial text-gold">
+                                    Loading
+                                </span>
+                            </>
+                        ) : isQueueEnded ? (
+                            <>
+                                <span className="text-sm uppercase tracking-editorial text-alabaster/60">
+                                    Queue Ended
+                                </span>
+                                <span className="text-alabaster/30">·</span>
+                                <button
+                                    onClick={toggleShuffle}
+                                    className="text-sm uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-2 group"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform">
+                                        <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z" />
+                                    </svg>
+                                    <span className="underline underline-offset-4 group-hover:no-underline">Shuffle All</span>
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                {isPlaying && (
+                                    <span className="flex gap-0.5">
+                                        <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+                                        <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+                                        <span className="w-1 h-4 bg-gold rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+                                    </span>
+                                )}
+                                <span className="text-sm uppercase tracking-editorial text-gold">
+                                    {isPlaying ? 'Now Playing' : 'Paused'}
+                                </span>
+                            </>
                         )}
-                        <span className="text-sm uppercase tracking-editorial text-gold">
-                            {isPlaying ? 'Now Playing' : 'Paused'}
-                        </span>
                     </div>
 
                     {/* Work Title (if showing movement) */}
