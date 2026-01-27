@@ -102,7 +102,7 @@ export const EchoPage = () => {
 
     return (
         <div className="min-h-screen px-6 sm:px-10 md:px-16 py-20">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 {/* Header Section - Centered */}
                 <div className="text-center mb-16">
                     {/* Decorative stars */}
@@ -148,7 +148,7 @@ export const EchoPage = () => {
                     </p>
 
                     {/* Work Cards Grid - Same structure as WorksPage */}
-                    <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <div className="grid md:grid-cols-3 gap-8 md:gap-12">
                         {specialWorks.map((work) => (
                             <article
                                 key={work.id}
