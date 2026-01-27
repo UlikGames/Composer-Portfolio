@@ -43,6 +43,9 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
   const hasNext = hasTrack;
   const hasPrev = hasTrack;
 
+  // Detect when queue has naturally ended (not just paused by user)
+  const isQueueEnded = hasTrack && !isPlaying && !isShuffle && currentIndex >= queue.length - 1 && duration > 0 && currentTime >= duration - 0.5;
+
   const artworkMap = useMemo(() => {
     const map = new Map<string, string>();
     works.forEach(work => {
@@ -194,6 +197,14 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
                   <span className="inline-block w-3 h-3 border border-gold border-t-transparent rounded-full animate-spin" />
                   Loading
                 </span>
+              ) : isQueueEnded ? (
+                <button
+                  onClick={toggleShuffle}
+                  className="text-micro uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-1 group"
+                >
+                  Queue ended ·{' '}
+                  <span className="underline underline-offset-2 group-hover:no-underline">Shuffle All ♪</span>
+                </button>
               ) : (
                 <span className="text-micro uppercase tracking-editorial text-gold">
                   {isPlaying ? 'Now Playing' : 'Paused'}
