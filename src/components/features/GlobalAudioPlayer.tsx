@@ -25,6 +25,7 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
     togglePlay,
     toggleShuffle,
     toggleRepeat,
+    startShufflePlay,
     playFromQueue,
     removeFromQueue,
     moveInQueue,
@@ -197,7 +198,7 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
                 </span>
               ) : isQueueEnded ? (
                 <button
-                  onClick={toggleShuffle}
+                  onClick={startShufflePlay}
                   className="text-micro uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-1.5 group"
                   title="Click to shuffle all tracks"
                 >

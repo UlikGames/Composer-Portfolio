@@ -80,6 +80,7 @@ interface AudioPlayerContextValue {
   togglePlay: () => void;
   toggleShuffle: () => void;
   toggleRepeat: () => void;
+  startShufflePlay: () => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
@@ -438,6 +439,23 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       return nextState;
     });
   };
+
+  // Start shuffle and immediately play a random track (for "Shuffle All" button)
+  const startShufflePlay = useCallback(() => {
+    setIsQueueEnded(false);
+    setIsShuffle(true);
+    const pool = buildShufflePool(currentTrack?.src);
+    setShufflePool(pool);
+    // Pick a random track and start playing
+    if (pool.length > 0) {
+      const randomTrack = pool[0];
+      setShufflePool(pool.slice(1));
+      setQueue([randomTrack]);
+      setCurrentIndex(0);
+      setIsPlaying(true);
+    }
+  }, [buildShufflePool, currentTrack?.src]);
+
   const toggleRepeat = () => setIsRepeat(prev => !prev);
 
   useEffect(() => {
@@ -476,8 +494,9 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     togglePlay,
     toggleShuffle,
     toggleRepeat,
+    startShufflePlay,
     audioRef,
-  }), [queue, currentIndex, currentTrack, isPlaying, isLoading, isShuffle, isRepeat, isQueueEnded]);
+  }), [queue, currentIndex, currentTrack, isPlaying, isLoading, isShuffle, isRepeat, isQueueEnded, startShufflePlay]);
 
   // Listen for canplay event to clear loading state
   useEffect(() => {

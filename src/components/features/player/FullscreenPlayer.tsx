@@ -30,6 +30,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
         togglePlay,
         toggleShuffle,
         toggleRepeat,
+        startShufflePlay,
         forcePlayTrack,
 
         addToQueue,
@@ -727,7 +728,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                 </span>
                                 <span className="text-alabaster/30">·</span>
                                 <button
-                                    onClick={toggleShuffle}
+                                    onClick={startShufflePlay}
                                     className="text-sm uppercase tracking-editorial text-gold hover:text-gold/80 transition-colors flex items-center gap-2 group"
                                 >
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="group-hover:scale-110 transition-transform">
