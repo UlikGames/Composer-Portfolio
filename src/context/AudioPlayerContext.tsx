@@ -67,6 +67,7 @@ interface AudioPlayerContextValue {
   isLoading: boolean;
   isShuffle: boolean;
   isRepeat: boolean;
+  isQueueEnded: boolean;
   addToQueue: (track: AudioTrack) => void;
   addMultipleToQueue: (tracks: AudioTrack[]) => void;
   playTrackNow: (track: AudioTrack) => void;
@@ -91,6 +92,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
+  const [isQueueEnded, setIsQueueEnded] = useState(false);
   const [history, setHistory] = useState<AudioTrack[]>([]); // Track history for going back
   const [shufflePool, setShufflePool] = useState<AudioTrack[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -306,12 +308,13 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    // Normal mode at end of queue - reset to beginning and pause
+    // Normal mode at end of queue - reset to beginning, pause, and mark as ended
     const audio = audioRef.current;
     if (audio) {
       audio.currentTime = 0;
     }
     setIsPlaying(false);
+    setIsQueueEnded(true);
   }, [queue, currentIndex, isShuffle, audioRef]);
 
   const prev = useCallback(() => {
@@ -370,6 +373,10 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
         }
       }
       return;
+    }
+    // Reset queue ended state when user starts playing
+    if (!isPlaying) {
+      setIsQueueEnded(false);
     }
     setIsPlaying(prev => !prev);
   };
@@ -456,6 +463,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     isLoading,
     isShuffle,
     isRepeat,
+    isQueueEnded,
     addToQueue,
     addMultipleToQueue,
     playTrackNow,
@@ -469,7 +477,7 @@ export const AudioPlayerProvider = ({ children }: { children: ReactNode }) => {
     toggleShuffle,
     toggleRepeat,
     audioRef,
-  }), [queue, currentIndex, currentTrack, isPlaying, isLoading, isShuffle, isRepeat]);
+  }), [queue, currentIndex, currentTrack, isPlaying, isLoading, isShuffle, isRepeat, isQueueEnded]);
 
   // Listen for canplay event to clear loading state
   useEffect(() => {

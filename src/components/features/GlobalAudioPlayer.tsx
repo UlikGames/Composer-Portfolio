@@ -19,6 +19,7 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
     isLoading,
     isShuffle,
     isRepeat,
+    isQueueEnded,
     prev,
     next,
     togglePlay,
@@ -42,9 +43,6 @@ export const GlobalAudioPlayer = (_props: GlobalAudioPlayerProps) => {
   // Always enable prev/next when there's a track (prev restarts, next goes to random in shuffle or does nothing)
   const hasNext = hasTrack;
   const hasPrev = hasTrack;
-
-  // Detect when queue has naturally ended (not just paused by user)
-  const isQueueEnded = hasTrack && !isPlaying && !isShuffle && currentIndex >= queue.length - 1 && duration > 0 && currentTime >= duration - 0.5;
 
   const artworkMap = useMemo(() => {
     const map = new Map<string, string>();
