@@ -274,7 +274,7 @@ const worksData: Work[] = [
     isFeatured: true,
     movements: [
       { title: 'Sa Présence', duration: '01:12', audioUrl: '/audio/images-d-elle/1.mp3' },
-      { title: 'Le Mystère d\'Elle', duration: '01:57', audioUrl: '/audio/images-d-elle/2.mp3' },
+      { title: 'Le Mystère d\u2019Elle', duration: '01:57', audioUrl: '/audio/images-d-elle/2.mp3' },
     ],
   },
   {
@@ -354,7 +354,7 @@ const worksData: Work[] = [
   },
   {
     id: 'linconnue',
-    title: 'L\'Inconnue',
+    title: 'L\u2019Inconnue',
     year: 2025,
     duration: "30:26",
     artist: "Ulvin Najafov",
@@ -629,7 +629,7 @@ const worksData: Work[] = [
     isFeatured: true,
     movements: [
       { title: 'I. Dance of the Dunes', duration: '05:26', audioUrl: '/audio/suite-arabe/1.mp3' },
-      { title: 'II. The Sheikh\'s Celebration', duration: '03:50', audioUrl: '/audio/suite-arabe/2.mp3' },
+      { title: 'II. The Sheikh\u2019s Celebration', duration: '03:50', audioUrl: '/audio/suite-arabe/2.mp3' },
     ],
   },
   {
