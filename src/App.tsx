@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { AudioPlayerProvider } from '@/context/AudioPlayerContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { Layout } from '@/components/layout/Layout';
@@ -47,6 +48,7 @@ function App() {
           </Layout>
         </AudioPlayerProvider>
       </ThemeProvider>
+      <Analytics />
     </BrowserRouter>
   );
 }
