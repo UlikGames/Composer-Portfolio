@@ -20,7 +20,7 @@ export const WorkDetailPage = () => {
     const isThreeNocturnes = id === 'three-nocturnes';
     const isLinconnue = id === 'linconnue';
     const isImagesElle = id === 'images-d-elle';
-    const isSpecialDate = new Date().getMonth() === 3 && new Date().getDate() === 5; // April 5
+    const isSpecialDate = new Date().getMonth() === 7 && new Date().getDate() === 25; // August 25
 
     // Console ASCII art for special pieces
     const logThreeNocturnesEasterEgg = () => {
@@ -250,7 +250,7 @@ export const WorkDetailPage = () => {
                             {/* Title */}
                             <h1 className={`font-serif text-4xl sm:text-5xl md:text-6xl leading-tight-luxury mb-6 ${(isThreeNocturnes || isLinconnue || isImagesElle) && isSpecialDate ? 'animate-pulse text-gold' : ''}`}>
                                 {work.title}
-                                {/* Easter Egg 4: April 5 special element */}
+                                {/* Easter Egg 4: August 25 special element */}
                                 {(isThreeNocturnes || isLinconnue || isImagesElle) && isSpecialDate && (
                                     <span className="ml-2 inline-block animate-bounce" title="Wherever you are today, I hope you’re surrounded by light ✧">✧</span>
                                 )}
