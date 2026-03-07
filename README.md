@@ -1,4 +1,4 @@
-# 🎼 Ulvin Najafov — Composer Portfolio
+# 🎼 Ulvin Najafov - Composer Portfolio
 
 A modern, elegant portfolio website for classical composer Ulvin Najafov. Built with React, TypeScript, and Tailwind CSS, featuring an immersive audio player, 3D interactive elements, and a luxurious editorial design aesthetic.
 
@@ -9,12 +9,12 @@ A modern, elegant portfolio website for classical composer Ulvin Najafov. Built 
 
 ## ✨ Features
 
-- **🎹 Interactive Audio Player** — Full-featured music player with shuffle, repeat, queue management, and fullscreen mode
-- **🎨 Editorial Design** — Luxurious, magazine-inspired aesthetic with custom typography and animations
-- **🌙 Dark/Light Mode** — Seamless theme switching with system preference detection
-- **📱 Fully Responsive** — Optimized for all devices from mobile to desktop
-- **🎭 3D Elements** — Interactive 3D piano scene powered by Spline
-- **⚡ Fast & Modern** — Built with Vite for lightning-fast development and builds
+- **🎹 Interactive Audio Player** - Full-featured music player with shuffle, repeat, queue management, and fullscreen mode
+- **🎨 Editorial Design** - Luxurious, magazine-inspired aesthetic with custom typography and animations
+- **🌙 Dark/Light Mode** - Seamless theme switching with system preference detection
+- **📱 Fully Responsive** - Optimized for all devices from mobile to desktop
+- **🎭 3D Elements** - Interactive 3D piano scene powered by Spline
+- **⚡ Fast & Modern** - Built with Vite for lightning-fast development and builds
 
 ## 🚀 Getting Started
 
