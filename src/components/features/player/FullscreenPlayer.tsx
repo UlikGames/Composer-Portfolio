@@ -250,7 +250,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
         const tracks = work.movements
             .filter(m => m.audioUrl)
             .map((m, idx) => ({
-                title: `${work.title} — ${m.title || `Movement ${idx + 1}`}`,
+                title: `${work.title} - ${m.title || `Movement ${idx + 1}`}`,
                 src: m.audioUrl!
             }));
         addMultipleToQueue(tracks);
@@ -381,7 +381,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                         {movementsWithCurrent?.map((movement, idx) => (
                             <button
                                 key={movement.audioUrl}
-                                onClick={() => handlePlayMovement(movement.audioUrl, `${currentWorkInfo?.workTitle} — ${movement.title}`)}
+                                onClick={() => handlePlayMovement(movement.audioUrl, `${currentWorkInfo?.workTitle} - ${movement.title}`)}
                                 className={cn(
                                     "w-full text-left px-3 py-2 rounded-md transition-all duration-200",
                                     movement.isCurrentTrack
@@ -547,7 +547,7 @@ export const FullscreenPlayer = ({ isOpen, onClose }: FullscreenPlayerProps) => 
                                                         .map((movement, idx) => {
                                                             const isPlaying = currentTrack?.src === movement.audioUrl;
                                                             const movTitle = movement.title || `Movement ${idx + 1}`;
-                                                            const fullTitle = `${work.title} — ${movTitle}`;
+                                                            const fullTitle = `${work.title} - ${movTitle}`;
                                                             return (
                                                                 <div
                                                                     key={movement.audioUrl}

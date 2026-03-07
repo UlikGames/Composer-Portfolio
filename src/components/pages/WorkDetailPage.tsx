@@ -161,10 +161,10 @@ export const WorkDetailPage = () => {
         if (work.movements && work.movements.length > 0) {
             const firstMovement = work.movements[0];
             if (firstMovement.audioUrl) {
-                playTrackNow({ title: `${work.title} — ${firstMovement.title}`, src: firstMovement.audioUrl });
+                playTrackNow({ title: `${work.title} - ${firstMovement.title}`, src: firstMovement.audioUrl });
                 work.movements.slice(1).forEach(m => {
                     if (m.audioUrl) {
-                        addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                        addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
                     }
                 });
             }
@@ -175,7 +175,7 @@ export const WorkDetailPage = () => {
 
     const handlePlayMovement = (movement: { title: string; audioUrl?: string }) => {
         if (movement.audioUrl) {
-            playTrackNow({ title: `${work.title} — ${movement.title}`, src: movement.audioUrl });
+            playTrackNow({ title: `${work.title} - ${movement.title}`, src: movement.audioUrl });
         }
     };
 
@@ -183,7 +183,7 @@ export const WorkDetailPage = () => {
         if (work.movements && work.movements.length > 0) {
             work.movements.forEach(m => {
                 if (m.audioUrl) {
-                    addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                    addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
                 }
             });
         } else if (work.audioUrl) {
@@ -376,7 +376,7 @@ export const WorkDetailPage = () => {
                                         {movement.audioUrl && (
                                             <>
                                                 <button
-                                                    onClick={() => addToQueue({ title: `${work.title} — ${movement.title}`, src: movement.audioUrl! })}
+                                                    onClick={() => addToQueue({ title: `${work.title} - ${movement.title}`, src: movement.audioUrl! })}
                                                     className="h-10 w-10 border border-charcoal/20 dark:border-alabaster/20 flex items-center justify-center hover:border-gold hover:text-gold transition-colors duration-500"
                                                     aria-label="Add to queue"
                                                     title="Add to queue"
@@ -476,9 +476,9 @@ export const WorkDetailPage = () => {
                                                                 if (latestWork.movements && latestWork.movements.length > 0) {
                                                                     const first = latestWork.movements.find(m => m.audioUrl);
                                                                     if (first?.audioUrl) {
-                                                                        playTrackNow({ title: `${latestWork.title} — ${first.title}`, src: first.audioUrl });
+                                                                        playTrackNow({ title: `${latestWork.title} - ${first.title}`, src: first.audioUrl });
                                                                         latestWork.movements.slice(1).forEach(m => {
-                                                                            if (m.audioUrl) addToQueue({ title: `${latestWork.title} — ${m.title}`, src: m.audioUrl });
+                                                                            if (m.audioUrl) addToQueue({ title: `${latestWork.title} - ${m.title}`, src: m.audioUrl });
                                                                         });
                                                                     }
                                                                 } else if (latestWork.audioUrl) {
@@ -496,7 +496,7 @@ export const WorkDetailPage = () => {
                                                             onClick={() => {
                                                                 if (latestWork.movements && latestWork.movements.length > 0) {
                                                                     latestWork.movements.forEach(m => {
-                                                                        if (m.audioUrl) addToQueue({ title: `${latestWork.title} — ${m.title}`, src: m.audioUrl });
+                                                                        if (m.audioUrl) addToQueue({ title: `${latestWork.title} - ${m.title}`, src: m.audioUrl });
                                                                     });
                                                                 } else if (latestWork.audioUrl) {
                                                                     addToQueue({ title: latestWork.title, src: latestWork.audioUrl });

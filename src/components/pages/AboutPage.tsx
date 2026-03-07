@@ -25,7 +25,7 @@ export const AboutPage = () => {
 
                     {/* Subtitle */}
                     <p className="text-warmGrey text-xl md:text-2xl max-w-2xl leading-relaxed">
-                        I study machines and motion — and write contemporary classical music built with
+                        I study machines and motion - and write contemporary classical music built with
                         structure, atmosphere, and feeling.
                     </p>
                 </div>
@@ -62,15 +62,15 @@ export const AboutPage = () => {
 
                             <div className="prose prose-lg">
                                 <p className="text-lg leading-relaxed mb-6 drop-cap">
-                                    I’m Ulvin Najafov — a mechanical engineering student who also composes and
+                                    I’m Ulvin Najafov - a mechanical engineering student who also composes and
                                     performs contemporary classical music. I’m fascinated by how the same ideas
                                     show up in both worlds: tension and release, balance, symmetry, resonance,
                                     and the way small details shape the whole.
                                 </p>
 
                                 <p className="text-warmGrey leading-relaxed mb-6">
-                                    My musical language sits close to the Romantic tradition — lyric melody,
-                                    rich harmony, clear storytelling — but I try to frame it with modern pacing
+                                    My musical language sits close to the Romantic tradition - lyric melody,
+                                    rich harmony, clear storytelling - but I try to frame it with modern pacing
                                     and texture. I’m drawn to pieces that feel “designed”: themes that return
                                     with purpose, harmonies that bend under pressure, and climaxes that arrive
                                     like a mechanism finally locking into place.
@@ -79,12 +79,12 @@ export const AboutPage = () => {
                                 <p className="text-warmGrey leading-relaxed mb-6">
                                     Most of my work lives at the piano, where sketches become miniatures,
                                     waltzes, nocturnes, and larger forms. From there, some pieces expand outward
-                                    into chamber writing and orchestral color — always with the same goal: make
+                                    into chamber writing and orchestral color - always with the same goal: make
                                     something emotionally direct, but structurally honest.
                                 </p>
 
                                 <p className="text-warmGrey leading-relaxed">
-                                    This site is my portfolio — a curated catalog of scores, recordings, and
+                                    This site is my portfolio - a curated catalog of scores, recordings, and
                                     projects in progress. If you’d like to collaborate, perform a piece, or just
                                     talk music, feel free to reach out.
                                 </p>
@@ -106,7 +106,7 @@ export const AboutPage = () => {
 
                         <blockquote className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight mb-12">
                             "I write music like I design mechanisms: with <em className="text-gold">clarity</em>,
-                            tension, and release — so emotion has a structure to live inside."
+                            tension, and release - so emotion has a structure to live inside."
                         </blockquote>
 
                         <div className="decorative-line mx-auto" />

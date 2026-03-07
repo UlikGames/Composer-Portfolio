@@ -43,7 +43,7 @@ const libraryTracks: AudioTrack[] = (() => {
     work.movements?.forEach((movement, idx) => {
       if (!movement.audioUrl) return;
       const label = movement.title || `Movement ${idx + 1}`;
-      const movementTrack = { title: `${work.title} — ${label}`, src: movement.audioUrl };
+      const movementTrack = { title: `${work.title} - ${label}`, src: movement.audioUrl };
       if (!seen.has(movementTrack.src)) seen.set(movementTrack.src, movementTrack);
     });
   });

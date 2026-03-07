@@ -25,7 +25,7 @@ export const WorkCard = ({
         const label = movement.title || `Movement ${index + 1}`;
         return {
           src: movement.audioUrl as string,
-          queueTitle: `${work.title} — ${label}`,
+          queueTitle: `${work.title} - ${label}`,
         };
       });
   }, [work.movements, work.title]);

@@ -58,7 +58,7 @@ export const Footer = forwardRef<HTMLElement>((_, ref) => {
                         </Link>
                         <p className="text-charcoal/60 dark:text-alabaster/60 text-sm leading-relaxed max-w-sm">
                             Mechanical engineering student and classical composer/pianist. This is my portfolio
-                            of scores, recordings, and works-in-progress — built with structure, contrast, and emotion.
+                            of scores, recordings, and works-in-progress - built with structure, contrast, and emotion.
                         </p>
                     </div>
 

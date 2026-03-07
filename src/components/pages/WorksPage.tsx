@@ -123,7 +123,7 @@ export const WorksPage = () => {
         return (work.movements ?? [])
             .map((movement, idx) => movement.audioUrl ? {
                 src: movement.audioUrl,
-                title: `${work.title} — ${movement.title || `Movement ${idx + 1}`}`,
+                title: `${work.title} - ${movement.title || `Movement ${idx + 1}`}`,
                 label: movement.title || `Movement ${idx + 1}`,
             } : null)
             .filter(Boolean) as { src: string; title: string; label: string }[];
@@ -171,7 +171,7 @@ export const WorksPage = () => {
         if (work.movements && work.movements.length > 0) {
             work.movements.forEach(m => {
                 if (m.audioUrl) {
-                    addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                    addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
                 }
             });
         } else if (work.audioUrl) {
@@ -237,7 +237,7 @@ export const WorksPage = () => {
 
                     {/* Description */}
                     <p className="text-warmGrey text-lg md:text-xl max-w-2xl leading-relaxed">
-                        Explore the complete collection of compositions—from intimate piano
+                        Explore the complete collection of compositions-from intimate piano
                         pieces to grand orchestral works.
                     </p>
                 </div>

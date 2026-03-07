@@ -43,7 +43,7 @@ export const EchoPage = () => {
         return (work.movements ?? [])
             .map((movement, idx) => movement.audioUrl ? {
                 src: movement.audioUrl,
-                title: `${work.title} — ${movement.title || `Movement ${idx + 1}`}`,
+                title: `${work.title} - ${movement.title || `Movement ${idx + 1}`}`,
                 label: movement.title || `Movement ${idx + 1}`,
             } : null)
             .filter(Boolean) as { src: string; title: string; label: string }[];
@@ -91,7 +91,7 @@ export const EchoPage = () => {
         if (work.movements && work.movements.length > 0) {
             work.movements.forEach(m => {
                 if (m.audioUrl) {
-                    addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                    addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
                 }
             });
         } else if (work.audioUrl) {

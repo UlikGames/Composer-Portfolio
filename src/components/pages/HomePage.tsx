@@ -14,9 +14,9 @@ export const HomePage = () => {
         if (work.movements && work.movements.length > 0) {
             const first = work.movements.find(m => m.audioUrl);
             if (first?.audioUrl) {
-                playTrackNow({ title: `${work.title} — ${first.title}`, src: first.audioUrl });
+                playTrackNow({ title: `${work.title} - ${first.title}`, src: first.audioUrl });
                 work.movements.slice(1).forEach(m => {
-                    if (m.audioUrl) addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                    if (m.audioUrl) addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
                 });
             }
         } else if (work.audioUrl) {
@@ -27,7 +27,7 @@ export const HomePage = () => {
     const handleQueueWork = (work: ReturnType<typeof getNewWorks>[0]) => {
         if (work.movements && work.movements.length > 0) {
             work.movements.forEach(m => {
-                if (m.audioUrl) addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                if (m.audioUrl) addToQueue({ title: `${work.title} - ${m.title}`, src: m.audioUrl });
             });
         } else if (work.audioUrl) {
             addToQueue({ title: work.title, src: work.audioUrl });
@@ -63,7 +63,7 @@ export const HomePage = () => {
 
                         {/* Description */}
                         <p className="text-warmGrey text-lg md:text-xl leading-relaxed mb-12 animate-fade-in-delay-3">
-                            By day I study mechanics, materials, and motion — by night I write contemporary
+                            By day I study mechanics, materials, and motion - by night I write contemporary
                             classical works: orchestral sketches, chamber pieces, and piano music shaped by
                             structure, contrast, and atmosphere.
                         </p>
@@ -143,7 +143,7 @@ export const HomePage = () => {
                                 Where <em className="text-gold">Design</em> Meets Sound
                             </h2>
                             <p className="text-charcoal/70 dark:text-alabaster/70 text-lg leading-relaxed mb-8 max-w-xl drop-cap">
-                                I’m a mechanical engineering student with a parallel life in music — writing
+                                I’m a mechanical engineering student with a parallel life in music - writing
                                 classical compositions and performing at the piano. I’m drawn to forms that feel
                                 inevitable: themes that return like mechanisms, harmonies that tension and release
                                 like springs, and textures built with the same care as a blueprint.
