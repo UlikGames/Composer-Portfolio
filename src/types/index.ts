@@ -20,6 +20,8 @@ export interface Work {
   imageUrl?: string; // Full-size image (poster) for detail page
   thumbnailUrl?: string; // Thumbnail image for catalog/card view (optional, falls back to imageUrl)
   performanceNote?: string; // Extra note about availability, rentals, or requests
+  isNew?: boolean;
+  newOrder?: number; // Lower number = shown first in Latest Works
   isFeatured?: boolean;
   movements?: Array<{
     title: string;

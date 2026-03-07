@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getWorkById } from '@/data/worksData';
+import { getWorkById, getNewWorks } from '@/data/worksData';
 import { useAudioPlayer } from '@/context/AudioPlayerContext';
 import { useState, useEffect, useRef } from 'react';
 
@@ -411,6 +411,121 @@ export const WorkDetailPage = () => {
                     </div>
                 </section>
             )}
+            {/* ============================================
+               LATEST WORKS SECTION
+               ============================================ */}
+            {(() => {
+                const latestWorks = getNewWorks(work.id, 4);
+                if (latestWorks.length === 0) return null;
+                return (
+                    <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
+                        <div className="max-w-luxury mx-auto">
+                            {/* Decorative Line */}
+                            <div className="decorative-line mb-8" />
+
+                            <p className="text-micro uppercase tracking-editorial text-warmGrey mb-6">
+                                Recently Added
+                            </p>
+
+                            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl leading-tight-luxury mb-12">
+                                Latest <em className="text-gold">Works</em>
+                            </h2>
+
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                                {latestWorks.map((latestWork, index) => (
+                                    <article
+                                        key={latestWork.id}
+                                        className="group flex flex-col h-full border-t border-charcoal dark:border-alabaster/20 pt-6 animate-fade-in-up"
+                                        style={{ animationDelay: `${index * 100}ms` }}
+                                    >
+                                        {/* Image */}
+                                        {(latestWork.thumbnailUrl || latestWork.imageUrl) && (
+                                            <Link to={`/works/${latestWork.id}`} className="block mb-4 overflow-hidden">
+                                                <div className="relative aspect-[3/4] overflow-hidden shadow-luxury">
+                                                    <img
+                                                        src={latestWork.thumbnailUrl || latestWork.imageUrl}
+                                                        alt={latestWork.title}
+                                                        className="w-full h-full object-cover img-editorial"
+                                                        loading="lazy"
+                                                    />
+                                                    <div className="absolute inset-0 shadow-inner-border pointer-events-none" />
+                                                    {/* New Badge */}
+                                                    <div className="absolute top-3 right-3 px-2 py-1 bg-gold text-charcoal text-[9px] uppercase tracking-editorial font-semibold">
+                                                        New
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )}
+
+                                        {/* Info */}
+                                        <div className="flex flex-col flex-1">
+                                            <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 truncate">
+                                                {latestWork.year} · {latestWork.instrumentation.join(', ')}
+                                            </p>
+                                            <h3 className="font-serif text-base md:text-xl lg:text-2xl mb-2 group-hover:text-gold transition-colors duration-500 leading-tight line-clamp-2">
+                                                <Link to={`/works/${latestWork.id}`}>{latestWork.title}</Link>
+                                            </h3>
+                                            <p className="text-xs text-warmGrey mb-3">
+                                                {latestWork.duration} · {latestWork.movements ? `${latestWork.movements.length} mvts` : 'Single'}
+                                            </p>
+                                            <div className="flex items-center gap-2 md:gap-4 flex-wrap mt-auto">
+                                                {(latestWork.audioUrl || (latestWork.movements && latestWork.movements.some(m => m.audioUrl))) && (
+                                                    <>
+                                                        <button
+                                                            onClick={() => {
+                                                                if (latestWork.movements && latestWork.movements.length > 0) {
+                                                                    const first = latestWork.movements.find(m => m.audioUrl);
+                                                                    if (first?.audioUrl) {
+                                                                        playTrackNow({ title: `${latestWork.title} — ${first.title}`, src: first.audioUrl });
+                                                                        latestWork.movements.slice(1).forEach(m => {
+                                                                            if (m.audioUrl) addToQueue({ title: `${latestWork.title} — ${m.title}`, src: m.audioUrl });
+                                                                        });
+                                                                    }
+                                                                } else if (latestWork.audioUrl) {
+                                                                    playTrackNow({ title: latestWork.title, src: latestWork.audioUrl });
+                                                                }
+                                                            }}
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
+                                                        >
+                                                            <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" className="md:w-3 md:h-3">
+                                                                <polygon points="5,3 19,12 5,21" />
+                                                            </svg>
+                                                            Play
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                if (latestWork.movements && latestWork.movements.length > 0) {
+                                                                    latestWork.movements.forEach(m => {
+                                                                        if (m.audioUrl) addToQueue({ title: `${latestWork.title} — ${m.title}`, src: m.audioUrl });
+                                                                    });
+                                                                } else if (latestWork.audioUrl) {
+                                                                    addToQueue({ title: latestWork.title, src: latestWork.audioUrl });
+                                                                }
+                                                            }}
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
+                                                        >
+                                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="md:w-3.5 md:h-3.5">
+                                                                <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z" />
+                                                            </svg>
+                                                            Queue
+                                                        </button>
+                                                    </>
+                                                )}
+                                                <Link
+                                                    to={`/works/${latestWork.id}`}
+                                                    className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster link-interactive"
+                                                >
+                                                    Details →
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                );
+            })()}
             {/* ============================================
                EASTER EGG MODAL
                ============================================ */}

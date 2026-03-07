@@ -115,6 +115,8 @@ const worksData: Work[] = [
     imageUrl: '/images/works/danza-de-las-sombras/poster.png',
     thumbnailUrl: '/images/works/danza-de-las-sombras/poster.png',
     isFeatured: true,
+    isNew: true,
+    newOrder: 4,
   },
   {
     id: 'drammatico-in-c-minor',
@@ -277,7 +279,7 @@ const worksData: Work[] = [
   {
     id: 'images-d-elle',
     title: 'Images d\u2019elle',
-    year: 2025,
+    year: 2026,
     duration: "03:09",
     artist: "Ulvin Najafov",
     instrumentation: ['Piano Solo'],
@@ -286,6 +288,8 @@ const worksData: Work[] = [
     imageUrl: '/images/works/images-d-elle/poster.png',
     thumbnailUrl: '/images/works/images-d-elle/poster.png',
     isFeatured: true,
+    isNew: true,
+    newOrder: 2,
     movements: [
       { title: 'Sa Présence', duration: '01:12', audioUrl: '/audio/images-d-elle/1.mp3' },
       { title: 'Le Mystère d\u2019Elle', duration: '01:57', audioUrl: '/audio/images-d-elle/2.mp3' },
@@ -369,7 +373,7 @@ const worksData: Work[] = [
   {
     id: 'linconnue',
     title: 'L\u2019Inconnue',
-    year: 2025,
+    year: 2026,
     duration: "30:26",
     artist: "Ulvin Najafov",
     instrumentation: ['Piano Solo'],
@@ -379,6 +383,8 @@ const worksData: Work[] = [
     imageUrl: '/images/works/linconnue/poster.jpg',
     thumbnailUrl: '/images/works/linconnue/poster.jpg',
     isFeatured: true,
+    isNew: true,
+    newOrder: 3,
     movements: [
       { title: 'L\u2019Inconnue No. 1 in C Minor', duration: '02:09', audioUrl: '/audio/linconnue/1.mp3' },
       { title: 'L\u2019Inconnue No. 2 in C# Minor', duration: '01:56', audioUrl: '/audio/linconnue/2.mp3' },
@@ -744,7 +750,7 @@ const worksData: Work[] = [
   {
     id: 'three-nocturnes',
     title: 'Three Nocturnes',
-    year: 2025,
+    year: 2026,
     duration: "07:34",
     artist: "Ulvin Najafov",
     instrumentation: ['Piano Solo', 'Bandoneon Solo'],
@@ -753,6 +759,8 @@ const worksData: Work[] = [
     imageUrl: '/images/works/three-nocturnes/poster.png',
     thumbnailUrl: '/images/works/three-nocturnes/poster.png',
     isFeatured: true,
+    isNew: true,
+    newOrder: 1,
     movements: [
       { title: 'Three Nocturnes - Hushed Afterglow', duration: '02:52', audioUrl: '/audio/three-nocturnes/1.mp3' },
       { title: 'Three Nocturnes - Nocturne Distant', duration: '02:28', audioUrl: '/audio/three-nocturnes/2.mp3' },
@@ -1057,4 +1065,11 @@ export const getTagFilters = (): string[] => {
     work.tags.forEach(tag => tags.add(tag));
   });
   return Array.from(tags).sort();
+};
+
+export const getNewWorks = (excludeId?: string, limit: number = 5): Work[] => {
+  return works
+    .filter(work => work.isNew && work.id !== excludeId)
+    .sort((a, b) => (a.newOrder ?? 999) - (b.newOrder ?? 999))
+    .slice(0, limit);
 };

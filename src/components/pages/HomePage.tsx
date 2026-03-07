@@ -1,12 +1,39 @@
 import { Link } from 'react-router-dom';
-import { works } from '@/data/worksData';
+import { getNewWorks } from '@/data/worksData';
 import { SplineScene } from '@/components/ui/SplineScene';
+import { useAudioPlayer } from '@/context/AudioPlayerContext';
 
 /**
  * Editorial HomePage
  * Dramatic hero, about teaser
  */
 export const HomePage = () => {
+    const { playTrackNow, addToQueue } = useAudioPlayer();
+
+    const handlePlayWork = (work: ReturnType<typeof getNewWorks>[0]) => {
+        if (work.movements && work.movements.length > 0) {
+            const first = work.movements.find(m => m.audioUrl);
+            if (first?.audioUrl) {
+                playTrackNow({ title: `${work.title} — ${first.title}`, src: first.audioUrl });
+                work.movements.slice(1).forEach(m => {
+                    if (m.audioUrl) addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+                });
+            }
+        } else if (work.audioUrl) {
+            playTrackNow({ title: work.title, src: work.audioUrl });
+        }
+    };
+
+    const handleQueueWork = (work: ReturnType<typeof getNewWorks>[0]) => {
+        if (work.movements && work.movements.length > 0) {
+            work.movements.forEach(m => {
+                if (m.audioUrl) addToQueue({ title: `${work.title} — ${m.title}`, src: m.audioUrl });
+            });
+        } else if (work.audioUrl) {
+            addToQueue({ title: work.title, src: work.audioUrl });
+        }
+    };
+
     return (
         <div className="min-h-screen">
             {/* ============================================
@@ -138,6 +165,103 @@ export const HomePage = () => {
             </section>
 
             {/* ============================================
+          LATEST WORKS SECTION
+          ============================================ */}
+            {(() => {
+                const latestWorks = getNewWorks(undefined, 4);
+                if (latestWorks.length === 0) return null;
+                return (
+                    <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
+                        <div className="max-w-luxury mx-auto">
+                            <div className="decorative-line mb-8" />
+
+                            <p className="text-micro uppercase tracking-editorial text-warmGrey mb-6">
+                                Recently Added
+                            </p>
+
+                            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight-luxury mb-12">
+                                Latest <em className="text-gold">Works</em>
+                            </h2>
+
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                                {latestWorks.map((work, index) => (
+                                    <article
+                                        key={work.id}
+                                        className="group flex flex-col h-full border-t border-charcoal dark:border-alabaster/20 pt-6 animate-fade-in-up"
+                                        style={{ animationDelay: `${index * 100}ms` }}
+                                    >
+                                        {(work.thumbnailUrl || work.imageUrl) && (
+                                            <Link to={`/works/${work.id}`} className="block mb-4 overflow-hidden">
+                                                <div className="relative aspect-[3/4] overflow-hidden shadow-luxury">
+                                                    <img
+                                                        src={work.thumbnailUrl || work.imageUrl}
+                                                        alt={work.title}
+                                                        className="w-full h-full object-cover img-editorial"
+                                                        loading="lazy"
+                                                    />
+                                                    <div className="absolute inset-0 shadow-inner-border pointer-events-none" />
+                                                    <div className="absolute top-3 right-3 px-2 py-1 bg-gold text-charcoal text-[9px] uppercase tracking-editorial font-semibold">
+                                                        New
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )}
+                                        <div className="flex flex-col flex-1">
+                                            <p className="text-[10px] md:text-micro uppercase tracking-editorial text-warmGrey mb-1 truncate">
+                                                {work.year} · {work.instrumentation.join(', ')}
+                                            </p>
+                                            <h3 className="font-serif text-base md:text-xl lg:text-2xl mb-2 group-hover:text-gold transition-colors duration-500 leading-tight line-clamp-2">
+                                                <Link to={`/works/${work.id}`}>{work.title}</Link>
+                                            </h3>
+                                            <p className="text-xs text-warmGrey mb-3">
+                                                {work.duration} · {work.movements ? `${work.movements.length} mvts` : 'Single'}
+                                            </p>
+                                            <div className="flex items-center gap-2 md:gap-4 flex-wrap mt-auto">
+                                                {(work.audioUrl || (work.movements && work.movements.some(m => m.audioUrl))) && (
+                                                    <>
+                                                        <button
+                                                            onClick={() => handlePlayWork(work)}
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
+                                                        >
+                                                            <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" className="md:w-3 md:h-3">
+                                                                <polygon points="5,3 19,12 5,21" />
+                                                            </svg>
+                                                            Play
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleQueueWork(work)}
+                                                            className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster hover:text-gold transition-colors duration-500 flex items-center gap-1"
+                                                        >
+                                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="md:w-3.5 md:h-3.5">
+                                                                <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z" />
+                                                            </svg>
+                                                            Queue
+                                                        </button>
+                                                    </>
+                                                )}
+                                                <Link
+                                                    to={`/works/${work.id}`}
+                                                    className="text-[9px] md:text-xs uppercase tracking-editorial text-charcoal dark:text-alabaster link-interactive"
+                                                >
+                                                    Details →
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+
+                            <div className="mt-12 text-center">
+                                <Link to="/works" className="btn-secondary">
+                                    View All Works
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+                );
+            })()}
+
+            {/* ============================================
           STATISTICS SECTION
           ============================================ */}
             <section className="py-20 md:py-32 px-6 sm:px-10 md:px-16 border-t border-charcoal/10 dark:border-alabaster/10">
@@ -145,7 +269,7 @@ export const HomePage = () => {
                     <div className="grid grid-cols-3 gap-8 md:gap-12">
                         <div className="text-center">
                             <p className="font-serif text-4xl md:text-5xl lg:text-6xl text-charcoal dark:text-alabaster mb-2">
-                                {works.length}+
+                                60+
                             </p>
                             <p className="text-micro uppercase tracking-editorial text-warmGrey">
                                 Works Published
