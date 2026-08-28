@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   images: {
+    // Artwork is already curated static content. Serving it directly keeps
+    // the portfolio independent of the optional image optimization runtime.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
