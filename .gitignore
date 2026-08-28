@@ -9,6 +9,8 @@ lerna-debug.log*
 
 # Dependencies
 node_modules
+apps/web/public
+.next
 dist
 dist-ssr
 *.local
@@ -42,3 +44,5 @@ coverage
 .cache
 .temp
 .tmp
+.vercel
+.env*

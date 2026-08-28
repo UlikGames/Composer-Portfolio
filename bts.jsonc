@@ -1,0 +1,21 @@
+// Better-T-Stack project metadata. Keep this file for future `add` commands.
+{
+  "$schema": "https://r2.better-t-stack.dev/schema.json",
+  "version": "3.40.5",
+  "createdAt": "2026-08-26T12:03:32.372Z",
+  "reproducibleCommand": "npx create-better-t-stack@latest Composer-Portfolio --frontend next --backend self --runtime none --database none --orm none --api none --auth none --payments none --addons none --examples none --db-setup none --web-deploy vercel --server-deploy none --no-git --package-manager npm --no-install",
+  "database": "none",
+  "orm": "none",
+  "backend": "self",
+  "runtime": "none",
+  "frontend": ["next"],
+  "addons": [],
+  "examples": [],
+  "auth": "none",
+  "payments": "none",
+  "packageManager": "npm",
+  "dbSetup": "none",
+  "api": "none",
+  "webDeploy": "vercel",
+  "serverDeploy": "none"
+}

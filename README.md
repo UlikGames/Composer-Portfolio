@@ -1,128 +1,90 @@
-# 🎼 Ulvin Najafov - Composer Portfolio
+# Composer Portfolio
 
-A modern, elegant portfolio website for classical composer Ulvin Najafov. Built with React, TypeScript, and Tailwind CSS, featuring an immersive audio player, 3D interactive elements, and a luxurious editorial design aesthetic.
+Ulvin Najafov'un eserleri, kayıtları ve notaları için hazırlanmış Next.js portfolyosu. Görsel yön; koyu editoryal yüzeyler, pirinç ve bordo vurgular, GSAP destekli kaydırma hareketleri ve React Three Fiber ile gerçek zamanlı bir rezonans sahnesi kullanır.
 
-![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?logo=vite&logoColor=white)
+## Teknoloji
 
-## ✨ Features
+- Next.js 16 App Router, React 19 ve TypeScript
+- Tailwind CSS 4
+- GSAP ve ScrollTrigger
+- Three.js, React Three Fiber ve Drei
+- Zod ile sunucu tarafı doğrulama
+- Resend ile iletişim ve bülten e-postaları
+- Vercel Analytics ve Speed Insights
+- npm workspaces tabanlı Better-T-Stack düzeni
 
-- **🎹 Interactive Audio Player** - Full-featured music player with shuffle, repeat, queue management, and fullscreen mode
-- **🎨 Editorial Design** - Luxurious, magazine-inspired aesthetic with custom typography and animations
-- **🌙 Dark/Light Mode** - Seamless theme switching with system preference detection
-- **📱 Fully Responsive** - Optimized for all devices from mobile to desktop
-- **🎭 3D Elements** - Interactive 3D piano scene powered by Spline
-- **⚡ Fast & Modern** - Built with Vite for lightning-fast development and builds
+## Medya mimarisi
 
-## 🚀 Getting Started
+- Görseller ve PDF notalar: repository içindeki `public/images` ve `public/scores`
+- Ses kayıtları: public Backblaze B2 bucket
+- Bucket tabanı: `https://f003.backblazeb2.com/file/composer-portfolio`
 
-### Prerequisites
+Sesler public URL ile salt okunur sunulduğu için uygulamanın B2 API anahtarına ihtiyacı yoktur. Yükleme, silme veya private bucket erişimi eklenecekse bu işlemler yalnızca sunucu tarafında ve ayrı B2 kimlik bilgileriyle uygulanmalıdır.
 
-- Node.js 18+ 
-- npm or yarn
+`scripts/ensure-public-link.mjs`, geliştirme ve derleme öncesinde kökteki `public` klasörünü `apps/web/public` konumuna bağlar. Windows'ta junction, diğer sistemlerde symlink kullanılır.
 
-### Installation
+## Yerel geliştirme
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/UlikGames/composer-portfolio.git
-   cd composer-portfolio
-   ```
+Gereksinimler: güncel Node.js 22 LTS ve npm 11.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-## 📁 Project Structure
-
-```
-composer-portfolio/
-├── public/
-│   ├── audio/          # Music files
-│   ├── images/         # Work thumbnails and assets
-│   └── scores/         # PDF scores
-├── src/
-│   ├── components/
-│   │   ├── features/   # Audio player, theme toggle, etc.
-│   │   ├── layout/     # Header, Footer, Layout
-│   │   ├── pages/      # HomePage, WorksPage, AboutPage, ContactPage
-│   │   └── ui/         # Reusable UI components
-│   ├── context/        # Audio player context
-│   ├── data/           # Works data and content
-│   ├── styles/         # Global CSS styles
-│   └── utils/          # Utility functions
-├── api/                # Serverless functions (Netlify/Vercel)
-└── ...config files
+```bash
+npm install
+npm run dev
 ```
 
-## 🛠️ Tech Stack
+Uygulama varsayılan olarak [http://localhost:3000](http://localhost:3000) adresinde açılır.
 
-| Category | Technology |
-|----------|------------|
-| Framework | React 19 |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Build Tool | Vite |
-| Routing | React Router v7 |
-| 3D Graphics | Three.js + React Three Fiber |
-| Deployment | Netlify / Vercel |
+## Ortam değişkenleri
 
-## 📜 Available Scripts
+`apps/web/.env.local` oluşturun. Örnek değerler `apps/web/.env.example` dosyasındadır.
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+```dotenv
+RESEND_API_KEY=re_...
+RESEND_FROM_EMAIL=Portfolio <onboarding@resend.dev>
+RESEND_TO_EMAIL=hello@example.com
+CONTACT_EMAIL=hello@example.com
+```
 
-## 🎨 Design System
+`RESEND_TO_EMAIL` tanımlanmazsa iletişim formu `CONTACT_EMAIL` değerini kullanır. Bu değerler olmadan proje yine derlenir, ancak formlar kontrollü biçimde `503` döndürür ve e-posta göndermez.
 
-The portfolio uses a custom design system with:
+## Komutlar
 
-- **Typography**: Playfair Display (serif) + custom sans-serif
-- **Colors**: Charcoal, Alabaster, Gold accents, Warm Grey
-- **Animations**: Fade-ins, smooth transitions, hover effects
-- **Shadows**: Luxury shadow system for depth
+```bash
+npm run check-types
+npm run lint
+npm run build
+npm audit
+```
 
-## 📧 Contact Form
+Vercel CLI ile önizleme veya üretim dağıtımı:
 
-The contact form uses Resend for email delivery. To configure:
+```bash
+npm run deploy
+npm run deploy:prod
+```
 
-1. Create a `.env.local` file:
-   ```
-   RESEND_API_KEY=your_api_key_here
-   ```
+Vercel CLI proje bağımlılığı değildir. Dağıtım komutları güncel CLI'ı `npx` üzerinden çağırır.
 
-2. The serverless function in `/api/send-email.ts` handles form submissions.
+## Proje yapısı
 
-## 🌐 Deployment
+```text
+apps/web/                 Next.js uygulaması
+  src/app/                Sayfalar ve API route handler'ları
+  src/components/         Arayüz, hareket ve 3D bileşenleri
+  src/lib/                Eser verisi ve yardımcılar
+packages/config/          Paylaşılan TypeScript ayarları
+packages/env/             Doğrulanmış ortam değişkenleri
+public/images/            Yerel görseller
+public/scores/            Yerel PDF notalar
+scripts/                  Workspace yardımcıları
+```
 
-### Netlify
+## Güvenlik
 
-The project includes `netlify.toml` configuration. Simply connect your repository to Netlify for automatic deployments.
+İletişim uçları aynı kaynak kontrolü, sıkı Zod şemaları, gövde boyutu sınırı, honeypot ve oran sınırlama uygular. HTTP güvenlik başlıkları Next.js yapılandırmasında merkezi olarak tanımlanır. Yerel inceleme kapsamı ve kalan riskler `SECURITY_REVIEW.md` içindedir.
 
-### Vercel
+## Dağıtım
 
-The project includes `vercel.json` configuration. Connect your repository to Vercel for instant deployments.
+Repository Vercel'e bağlandığında kökteki `vercel.json`, `apps/web` servisini ve workspace kurulum komutunu seçer. Üretim öncesinde Resend değişkenlerini Vercel proje ayarlarına ekleyin, alan adını Resend'de doğrulayın ve formları gerçek alıcıyla test edin.
 
-## 📄 License
-
-This project is private and not licensed for public use.
-
----
-
-<p align="center">
-  <em>Crafting Timeless Music</em><br>
-  <strong>Ulvin Najafov</strong>
-</p>
+Bu proje özeldir ve açık kaynak lisansı altında dağıtılmaz.
