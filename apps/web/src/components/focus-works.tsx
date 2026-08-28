@@ -5,7 +5,7 @@ import type { Work } from "@/lib/types";
 
 export function FocusWorks({ works }: { works: Work[] }) {
   const cards = works
-    .map((work) => ({ title: work.title, src: work.thumbnailUrl || work.imageUrl || "" }))
+    .map((work) => ({ title: work.title, src: work.thumbnailUrl || work.imageUrl || "", href: `/works/${work.id}` as `/works/${string}` }))
     .filter((card) => card.src)
     .slice(0, 4);
 

@@ -2,11 +2,14 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import type { Route } from "next";
 import { cn } from "@/lib/utils";
 
 type FocusCard = {
   title: string;
   src: string;
+  href: string;
 };
 
 export const Card = React.memo(
@@ -21,7 +24,9 @@ export const Card = React.memo(
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
   }) => (
-    <div
+    <Link
+      href={card.href as Route}
+      aria-label={`View ${card.title}`}
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
@@ -46,7 +51,7 @@ export const Card = React.memo(
           {card.title}
         </div>
       </div>
-    </div>
+    </Link>
   )
 );
 
