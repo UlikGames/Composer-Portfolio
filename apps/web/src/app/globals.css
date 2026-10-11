@@ -118,9 +118,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .hero { min-height: calc(100svh - 5rem); display: grid; align-items: center; padding-block: 3rem; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(25rem, 1.05fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; }
-.hero-copy { position: relative; z-index: 2; }
+.hero-copy { position: relative; z-index: 2; min-width: 0; }
 .hero-title { font-size: clamp(4rem, 8vw, 8.6rem); margin: 1.7rem 0 2rem; }
-.hero-title { display: block !important; max-width: 8.2ch; text-wrap: balance; }
+.hero-title { display: block !important; max-width: 100%; text-wrap: balance; }
 .hero-title .split-word:nth-child(2) { color: var(--brass-bright); font-style: italic; }
 .hero-lede { max-width: 37rem; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.25rem); line-height: 1.75; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.2rem; }
